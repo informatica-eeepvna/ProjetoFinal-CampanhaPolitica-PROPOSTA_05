@@ -738,7 +738,8 @@ p {
   .informations-container {
     flex-direction: column;
     padding: 20px;
-    height: 100vh;
+    height: auto;
+    gap: 20px;
   }
 
   .promises,
