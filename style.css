@@ -797,8 +797,8 @@ p {
   .hours,
   .minutes,
   .seconds {
-    max-width: 90px; /* Reduz o tamanho dos relógios */
-    max-height: 90px;
+    width: 75px; /* Reduz o tamanho dos relógios */
+    height: 75px;
     font-size: 20px; /* Reduz o tamanho da fonte */
   }
 
