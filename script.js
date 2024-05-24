@@ -1,3 +1,14 @@
+// Configurando o ScrollReveal
+ScrollReveal().reveal('.sr-element', {
+    delay: 300,
+    duration: 1000,
+    easing: 'ease-in',
+    origin: 'bottom',
+    distance: '60px',
+    reset: true // Para animar somente uma vez
+});
+
+
 document.getElementById('mobile-menu').addEventListener('click', function() {
     var menuToggle = document.querySelector('.menu-toggle');
     menuToggle.classList.toggle('active');

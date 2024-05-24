@@ -9,7 +9,9 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
-
+.sr-element {
+  visibility: hidden;
+}
 header {
   background-color: var(--fundo-color);
   color: #fff;
