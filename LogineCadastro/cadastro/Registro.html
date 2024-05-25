@@ -61,6 +61,9 @@
       })
         .then(() => {
           alert('Cadastro feito com sucesso!');
+          setInterval(() => {
+            window.location.href = '../login/Login.html'
+          }, 1000);
         })
         .catch((error) => {
           console.error("Erro ao salvar no Firebase:", error);
