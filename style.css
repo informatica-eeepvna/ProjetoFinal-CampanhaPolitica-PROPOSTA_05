@@ -702,7 +702,6 @@ p {
     z-index: 1;
     left: 40%;
     height: 100%;
-    padding-top: 25px;
     z-index: 999;
   }
 
@@ -901,7 +900,6 @@ p {
     z-index: 1;
     left: 40%;
     height: 100%;
-    padding-top: 25px;
   }
 
   .nav-links.active li:not(:first-child) {
