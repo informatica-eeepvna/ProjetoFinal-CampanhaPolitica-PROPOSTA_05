@@ -9,9 +9,14 @@ ScrollReveal().reveal('.sr-element', {
 });
 
     document.getElementById('profile-icon').addEventListener('click', function() {
-        const dropdown = document.querySelector('.profile-dropdown');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        window.location.href = "./LogineCadastro/cadastro/Registro.html"
     });
+    
+    const username = localStorage.getItem('username');
+    if (username) {
+      // Se o nome do usuário estiver disponível, exibi-lo
+      document.getElementById('username').textContent = username;
+    }
 
     // Fechar o dropdown se clicar fora
     window.onclick = function(event) {

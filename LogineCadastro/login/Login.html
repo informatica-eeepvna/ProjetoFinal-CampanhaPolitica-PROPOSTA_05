@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
 </head>
+
 <body>
   <section class="area-login">
     <div class="login">
@@ -37,7 +39,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
 
-    document.getElementById("loginForm").addEventListener('submit', async function(e) {
+    document.getElementById("loginForm").addEventListener('submit', async function (e) {
       e.preventDefault();
       const email = document.getElementById("email").value;
       const senha = document.getElementById("senha").value;
@@ -45,7 +47,7 @@
       try {
         const dbRef = ref(db);
         const snapshot = await get(child(dbRef, `users`)); // Adjusted to 'users' path
-        
+
         if (snapshot.exists()) {
           const users = snapshot.val();
           const user = Object.values(users).find(user => user.email === email);
@@ -53,7 +55,8 @@
           if (user) {
             if (user.senha === senha) {
               alert('Login bem-sucedido!');
-              window.location.href = "../../index.html"
+              localStorage.setItem('username', user.nome); // Armazenar o nome do usuário
+              window.location.href = "../../index.html";
             } else {
               alert('Senha incorreta. Tente novamente.');
             }
@@ -70,4 +73,5 @@
     });
   </script>
 </body>
+
 </html>
