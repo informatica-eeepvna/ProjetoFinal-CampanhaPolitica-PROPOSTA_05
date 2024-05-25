@@ -15,9 +15,9 @@
       <form id="loginForm">
         <input type="email" id="email" name="email" placeholder="Email">
         <input type="password" id="senha" name="senha" placeholder="Senha" autofocus>
-        <input type="submit" value="Entrar">
+        <input type="submit" value="Entrar" style="color: white;">
       </form>
-      <p>Ainda não tem uma conta? <a href="../cadastro/Registro.html">Criar conta</a></p>
+      <p>Ainda não tem uma conta?<a href="../cadastro/Registro.html">Criar conta</a></p>
     </div>
   </section>
   <script type="module">
@@ -50,9 +50,10 @@
 
         if (snapshot.exists()) {
           const users = snapshot.val();
-          const user = Object.values(users).find(user => user.email === email);
-
-          if (user) {
+          // Verificar se o email existe no banco de dados
+          if (users && Object.values(users).some(user => user.email === email)) {
+            const user = Object.values(users).find(user => user.email === email);
+            // Verificar se a senha está correta
             if (user.senha === senha) {
               alert('Login bem-sucedido!');
               localStorage.setItem('username', user.nome); // Armazenar o nome do usuário
@@ -61,7 +62,7 @@
               alert('Senha incorreta. Tente novamente.');
             }
           } else {
-            alert('Usuário não encontrado. Verifique o email e tente novamente.');
+            alert('Email não cadastrado. Por favor, verifique o email e tente novamente ou crie uma conta.');
           }
         } else {
           alert('Nenhum usuário encontrado no banco de dados.');
@@ -71,6 +72,8 @@
         alert('Erro ao fazer login. Tente novamente mais tarde.');
       }
     });
+
+
   </script>
 </body>
 

@@ -16,10 +16,10 @@
 
       <form id="registroForm">
         <input type="text" id="nome" name="nome" placeholder="Nome completo" autofocus required>
-        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de nascimento" required>
+        <input type="text" id="dataNascimento" name="dataNascimento" placeholder="Data de nascimento" required>
         <input type="email" id="email" name="email" placeholder="Email" required>
         <input type="password" id="senha" name="senha" placeholder="Senha" minlength="8" required>
-        <input type="submit" value="Registrar">
+        <input type="submit" value="Registrar" style="color: white;">
         <p>Já tem uma conta? <a href="../login/Login.html">Login</a></p>
       </form>
     </div>
@@ -70,6 +70,7 @@
           alert('Erro ao fazer cadastro: ' + error.message);
         });
     });
+    
   </script>
 
 </body>
