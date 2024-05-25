@@ -73,17 +73,58 @@ header {
   transform-origin: left;
 }
 
-/* Estilos para os botões de login e cadastro */
-.nav-links .login-btn,
-.nav-links .cadastro-btn {
-  background-color: #07ed50;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-left: 10px;
+
+
+/* Estilo para o ícone de perfil */
+.profile-menu {
+  position: relative;
+  display: inline-block;
 }
+
+#profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Estilo para o ícone de perfil */
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+#profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffffff; /* Ajuste a cor conforme necessário */
+}
+
+/* Estilo para o menu suspenso */
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-top: 10px;
+}
+
+.profile-dropdown a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Mostrar o menu suspenso ao passar o mouse */
+.profile-menu:hover .profile-dropdown {
+  display: block;
+}
+
+
 
 /* Estilos para o menu toggle */
 .menu-toggle {

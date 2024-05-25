@@ -8,6 +8,24 @@ ScrollReveal().reveal('.sr-element', {
     reset: true // Para animar somente uma vez
 });
 
+    document.getElementById('profile-icon').addEventListener('click', function() {
+        const dropdown = document.querySelector('.profile-dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fechar o dropdown se clicar fora
+    window.onclick = function(event) {
+        if (!event.target.matches('#profile-icon')) {
+            const dropdowns = document.getElementsByClassName("profile-dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.style.display === 'block') {
+                    openDropdown.style.display = 'none';
+                }
+            }
+        }
+    }
+
 
 document.getElementById('mobile-menu').addEventListener('click', function() {
     var menuToggle = document.querySelector('.menu-toggle');

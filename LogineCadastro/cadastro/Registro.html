@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+</head>
+
+<body>
+
+  <section class="area-login">
+    <div class="login">
+      <div><img src="../imgs/Toda azul.png" alt="Logo"></div>
+
+      <form id="registroForm">
+        <input type="text" id="nome" name="nome" placeholder="Nome completo" autofocus required>
+        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de nascimento" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="password" id="senha" name="senha" placeholder="Senha" minlength="8" required>
+        <input type="submit" value="Registrar">
+        <p>Já tem uma conta? <a href="../login/Login.html">Login</a></p>
+      </form>
+    </div>
+  </section>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
+      authDomain: "arthur-schultz.firebaseapp.com",
+      databaseURL: "https://arthur-schultz-default-rtdb.firebaseio.com",
+      projectId: "arthur-schultz",
+      storageBucket: "arthur-schultz.appspot.com",
+      messagingSenderId: "273634896292",
+      appId: "1:273634896292:web:0654cd33669194ded4b931",
+      measurementId: "G-C5G4446HG9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.getElementById("registroForm").addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const dataNascimento = document.getElementById("dataNascimento").value;
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      set(ref(db, 'users/' + nome), {
+        nome: nome,
+        dataNascimento: dataNascimento,
+        email: email,
+        senha: senha
+      })
+        .then(() => {
+          alert('Cadastro feito com sucesso!');
+        })
+        .catch((error) => {
+          console.error("Erro ao salvar no Firebase:", error);
+          alert('Erro ao fazer cadastro: ' + error.message);
+        });
+    });
+  </script>
+
+</body>
+
+</html>
