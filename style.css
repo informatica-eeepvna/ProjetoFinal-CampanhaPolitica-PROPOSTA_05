@@ -703,6 +703,7 @@ p {
     left: 40%;
     height: 100%;
     padding-top: 25px;
+    z-index: 999;
   }
 
   .nav-links.active li:not(:first-child) {
@@ -894,17 +895,42 @@ p {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 92px;
+    top: 95px;
     background-color: #2c2a2a;
     width: 60%;
     z-index: 1;
     left: 40%;
+    height: 100%;
+    padding-top: 25px;
   }
 
-  .nav-links.active li {
+  .nav-links.active li:not(:first-child) {
     padding: 10px;
+    margin: 20px 0;
+    font-weight: 500;
+    border-bottom: 2px solid white;
+    border-width: 0.5px;
+}
+
+
+  /* Estilo para o ícone de perfil */
+  .nav-links li .profile {
+    display: flex;
+    align-items: center;
     margin: 0;
-    text-align: end;
+    height: 80px;
+    border: solid 1px white;
+    width: 99%;
+  }
+  .nav-links li .profile:hover{
+    cursor: pointer;
+  }
+  .nav-links li{
+    margin-right: 0;
+  }
+  .nav-links li .profile ion-icon {
+    font-size: 4rem; /* Tamanho do ícone */
+    margin-right: 5px; /* Espaçamento à direita do ícone */
   }
   .slider-container {
     height: 100vh;
