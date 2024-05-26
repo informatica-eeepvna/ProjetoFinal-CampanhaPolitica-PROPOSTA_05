@@ -12,11 +12,11 @@ ScrollReveal().reveal('.sr-element', {
         window.location.href = "./LogineCadastro/cadastro/Registro.html"
     });
     
-    const username = localStorage.getItem('username');
-    if (username) {
-      // Se o nome do usuário estiver disponível, exibi-lo
-      document.getElementById('username').textContent = username;
-    }
+     const username = localStorage.getItem('username');
+  if (username) {
+    // Se o nome do usuário estiver disponível, exibi-lo
+    document.getElementById('username').textContent = username;
+  }
 
     // Fechar o dropdown se clicar fora
     window.onclick = function(event) {
@@ -32,12 +32,20 @@ ScrollReveal().reveal('.sr-element', {
     }
 
 
-document.getElementById('mobile-menu').addEventListener('click', function() {
-    var menuToggle = document.querySelector('.menu-toggle');
-    menuToggle.classList.toggle('active');
-    var navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-});
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+        var menuToggle = document.querySelector('.menu-toggle');
+        menuToggle.classList.toggle('active');
+        var navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+        
+        // Bloqueia ou desbloqueia a rolagem do corpo da página
+        if (menuToggle.classList.contains('active')) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+    });
+    
 
 
 

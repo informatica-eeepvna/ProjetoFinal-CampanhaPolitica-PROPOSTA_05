@@ -12,6 +12,10 @@
 .sr-element {
   visibility: hidden;
 }
+.no-scroll {
+  overflow: hidden;
+}
+
 header {
   background-color: var(--fundo-color);
   color: #fff;
@@ -30,7 +34,7 @@ header {
 
 /* Estilos para a lista de navegação */
 .nav-links {
-  list-style-type: none;
+  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -41,13 +45,21 @@ header {
 }
 
 .nav-links li {
-  margin-right: 25px;
   display: flex;
   align-items: center;
+  margin-right: 25px;
+}
+
+/* Mover o primeiro item para a última posição */
+.nav-links li:first-child {
+  order: 99;
+}
+.nav-links li:not(:first-child) {
+  order: 1;
 }
 
 .nav-links li a {
-  color: rgb(255, 255, 255);
+  color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -80,9 +92,49 @@ header {
 }
 
 .menu-toggle ion-icon {
-  font-size: 24px; /* Tamanho desejado para o ícone do menu */
-  margin-right: 10px; /* Espaçamento entre o ícone do menu e o texto */
+  font-size: 24px;
+  margin-right: 10px;
   display: none;
+}
+
+/* Estilos para o perfil */
+.nav-links .profile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  margin: 0;
+}
+
+.profile:hover {
+  background-color: #f0f0f0;
+}
+
+#profile-icon {
+  font-size: 50px;
+  color: #333;
+  margin-right: 10px;
+}
+
+#logout {
+  font-size: 16px;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 20px;
+}
+
+#logout:hover {
+  color: #0056b3;
+}
+
+#username {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
 }
 
 .slider-container {
@@ -690,14 +742,13 @@ p {
   .menu-toggle.active nav {
     display: block; /* Exibe a lista de navegação quando o menu está aberto */
   }
-  
 
   .nav-links.active {
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 95px;
-    background-color: #2c2a2a;
+    background-color: #585858;
     width: 60%;
     z-index: 1;
     left: 40%;
@@ -709,10 +760,8 @@ p {
     padding: 10px;
     margin: 20px 0;
     font-weight: 500;
-    border-bottom: 2px solid white;
     border-width: 0.5px;
-}
-
+  }
 
   /* Estilo para o ícone de perfil */
   .nav-links li .profile {
@@ -723,18 +772,21 @@ p {
     border: solid 1px white;
     width: 99%;
   }
-  .nav-links li .profile:hover{
+  .nav-links li .profile:hover {
     cursor: pointer;
   }
-  .nav-links li{
+  .nav-links li {
     margin-right: 0;
   }
   .nav-links li .profile ion-icon {
     font-size: 4rem; /* Tamanho do ícone */
     margin-right: 5px; /* Espaçamento à direita do ícone */
   }
-
- 
+  .nav-links li a {
+    display: flex;
+    align-items:flex-end;
+    gap: 5px;
+  }
 
   .slider-container {
     height: 100vh;
@@ -895,21 +947,20 @@ p {
     flex-direction: column;
     position: absolute;
     top: 95px;
-    background-color: #2c2a2a;
+    background-color: #585858;
     width: 60%;
     z-index: 1;
     left: 40%;
     height: 100%;
+    z-index: 999;
   }
 
   .nav-links.active li:not(:first-child) {
     padding: 10px;
     margin: 20px 0;
     font-weight: 500;
-    border-bottom: 2px solid white;
     border-width: 0.5px;
-}
-
+  }
 
   /* Estilo para o ícone de perfil */
   .nav-links li .profile {
@@ -920,15 +971,20 @@ p {
     border: solid 1px white;
     width: 99%;
   }
-  .nav-links li .profile:hover{
+  .nav-links li .profile:hover {
     cursor: pointer;
   }
-  .nav-links li{
+  .nav-links li {
     margin-right: 0;
   }
   .nav-links li .profile ion-icon {
     font-size: 4rem; /* Tamanho do ícone */
     margin-right: 5px; /* Espaçamento à direita do ícone */
+  }
+  .nav-links li a {
+    display: flex;
+    align-items:flex-end;
+    gap: 5px;
   }
   .slider-container {
     height: 100vh;
