@@ -52,6 +52,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
                 document.querySelectorAll('.input-group').forEach((element) => {
                     element.style.display = 'block';
                 });
+                document.getElementById('loginModal').style.display = "none";
             } else {
                 const modal = document.getElementById('loginModal');
                 modal.style.display = "flex";
@@ -100,6 +101,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
         document.getElementById("logout-link").addEventListener("click", function () {
             signOut(auth).then(() => {
                 // Remover o nome de usuário do localStorage, se necessário
+                window.location.reload();
             }).catch((error) => {
                 console.error(error);
             });
