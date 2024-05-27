@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-info h2 {
+            margin-top: 0;
+        }
+
+        .profile-options {
+            text-align: center;
+        }
+
+        .profile-options a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .profile-options a:hover {
+            background-color: #0056b3;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-cadastrar {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-cadastrar:hover {
+            background-color: #218838;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .area-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            width: 355px;
+            height: 320px;
+            padding: 35px;
+            border-radius: 10px;
+        }
+
+        .login form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .login input {
+            margin-top: 10px;
+            background-color: #cecaca;
+            height: 45px;
+            outline: none;
+            color: #000000;
+            padding-left: 10px;
+            border: none;
+            caret-color: black;
+        }
+
+        .login img {
+            width: 65px;
+            height: auto;
+        }
+
+        input::placeholder {
+            color: #252a34;
+            font-size: 14px;
+        }
+
+        form [type="submit"] {
+            display: block;
+            background-color: #0562ac;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        /* Media Queries */
+
+        @media (max-width: 768px) {
+            .profile-container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .login {
+                width: 90%;
+                height: auto;
+                padding: 20px;
+            }
+
+            .login input {
+                height: 40px;
+            }
+
+            form [type="submit"] {
+                font-size: 18px;
+            }
+        }
+
+        @media only screen and (min-width: 767px) and (max-width: 991px) {
+            .profile-container {
+                margin: 30px;
+                padding: 20px;
+            }
+
+            .login {
+                width: 80%;
+                height: auto;
+                padding: 25px;
+            }
+
+            .login input {
+                height: 42px;
+            }
+
+            form [type="submit"] {
+                font-size: 19px;
+            }
+        }
+
+        @media only screen and (min-width: 992px) and (max-width: 1023px) {
+            .profile-container {
+                margin: 40px;
+                padding: 25px;
+            }
+
+            .login {
+                width: 70%;
+                height: auto;
+                padding: 30px;
+            }
+
+            .login input {
+                height: 44px;
+            }
+
+            form [type="submit"] {
+                font-size: 20px;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) and (max-width: 1280px) {
+            .profile-container {
+                margin: 50px auto;
+                padding: 30px;
+            }
+
+            .login {
+                width: 60%;
+                height: auto;
+                padding: 35px;
+            }
+
+            .login input {
+                height: 45px;
+            }
+
+            form [type="submit"] {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-info">
+            <h2>Dados do Perfil</h2>
+            <p>Nome de Usuário: <span id="username"></span></p>
+            <p>Email: <span id="useremail"></span></p>
+        </div>
+        <div class="input-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+        </div>
+        <div class="input-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" required>
+        </div>
+        <div class="input-group">
+            <label for="data-nascimento">Data de Nascimento:</label>
+            <input type="date" id="data-nascimento" required>
+        </div>
+        <div class="input-group">
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" required>
+        </div>
+        <div class="input-group">
+            <label for="tipo">Tipo de Apoiador:</label>
+            <select id="tipo" required>
+                <option value="">Selecione...</option>
+                <option value="Eleitor">Eleitor</option>
+                <option value="Apoiador">Apoiador</option>
+                <option value="Patrocinador">Patrocinador</option>
+            </select>
+        </div>
+        <button class="btn-cadastrar" id="verificarAutenticacao">Cadastrar Apoiador</button>
+        <div class="profile-options">
+            <a href="../index.html" id="logout-link" style="margin-top: 20px;">Sair</a>
+        </div>
+    </div>
+
+    <!-- Modal de login -->
+    <div id="loginModal" class="modal">
+        <div class="area-login">
+            <div class="login">
+                <span class="close">&times;</span>
+                <div><img src="../imgs/Toda azul.png" alt="Logo"></div>
+                <form id="loginForm">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <input type="password" id="senha" name="senha" placeholder="Senha" autofocus>
+                    <input type="submit" value="Entrar" style="color: white;">
+                </form>
+                <p>Ainda não tem uma conta? <a href="../cadastro/Registro.html">Criar conta</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

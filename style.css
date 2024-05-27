@@ -97,57 +97,22 @@ header {
   display: none;
 }
 
-/* Estilos para o perfil */
-.nav-links .profile {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  border-radius: 10px;
-  transition: background-color 0.3s;
-  margin: 0;
-  border: 1px solid white;
-}
-
-#profile-icon {
-  font-size: 50px;
-  color: #ffffff;
-  margin-right: 10px;
-  display: block;
-}
-
-#login-link,
-#register-link,
-#logout-link {
-  color: #fff;
+.nav-links button {
+  background-color: #ae330e; /* Verde */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
   text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-#logout-link {
-  margin: 0 15px;
-}
-#login-link:hover,
-#register-link:hover,
-#logout-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
-#login-link {
-  background-color: #0464ab;
-}
-
-#register-link {
-  background-color: #218838;
-}
-
-#logout-link {
-  background-color: #dc3545;
-}
-
-#username {
-  font-size: 18px;
-  font-weight: 500;
-  color: #ffffff;
+.nav-links button:hover {
+  background-color: #ff0000; /* Verde mais escuro */
 }
 
 .slider-container {
@@ -797,13 +762,14 @@ p {
   }
   .nav-links li a {
     display: flex;
-    align-items: flex-end;
+    align-items:flex-end;
     gap: 5px;
   }
-  #register-link,
-  #logout-link {
-    margin: 0 10px;
-  }
+#login-link,
+#register-link,
+#logout-link{
+  margin: 0 10px;
+}
   .slider-container {
     height: 100vh;
   }
@@ -999,7 +965,7 @@ p {
   }
   .nav-links li a {
     display: flex;
-    align-items: flex-end;
+    align-items:flex-end;
     gap: 5px;
   }
   .slider-container {
@@ -1007,7 +973,7 @@ p {
   }
   #login-link,
   #register-link,
-  #logout-link {
+  #logout-link{
     margin: 0 10px;
   }
   .slide-content {
