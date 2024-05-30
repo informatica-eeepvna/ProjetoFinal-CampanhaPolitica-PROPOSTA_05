@@ -232,7 +232,6 @@ p {
 .section-one,
 .section-two,
 .section-tree,
-.section-four,
 .section-five,
 .section-eight {
   height: 50vh;
@@ -262,6 +261,30 @@ p {
 }
 .section-four {
   border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+}
+.section-four .buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.section-four .buttons button {
+  background-color: #04ab17;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  width: 25%;
+  height: 40px;
+}
+
+.section-four .buttons button:hover {
+  background-color: #1f6b25;
 }
 .section-four .conquistas {
   display: flex;
@@ -381,7 +404,6 @@ p {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  gap: 20px; /* Espaçamento entre os elementos */
   color: white;
   font-size: 20px;
 }
@@ -409,6 +431,7 @@ p {
 .informations p {
   color: white;
 }
+
 
 .sections-five {
   display: grid;
@@ -1086,11 +1109,7 @@ p {
   .slider-container {
     height: 100vh;
   }
-  #login-link,
-  #register-link,
-  #logout-link {
-    margin: 0 10px;
-  }
+
   .slide-content {
     top: 60%;
   }
@@ -1129,7 +1148,7 @@ p {
 
   .section-two-container img,
   .two-text {
-    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    width: 100%; /* Ajusta a largura para 80% em telas menores */
     max-width: 100%; /* Remove a largura máxima */
     margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
   }

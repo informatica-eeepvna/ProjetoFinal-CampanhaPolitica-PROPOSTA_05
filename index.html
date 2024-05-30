@@ -9,6 +9,9 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/LogoTipo.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
     <title>Arthur Shutz</title>
 </head>
 
@@ -22,7 +25,7 @@
                     <li>
                         <button id="restrito">Area Admin</button>
                     </li>
-                    
+
                     <li><a href="#"><ion-icon name="home-outline"></ion-icon>Home</a></li>
                     <li><a href="#"><ion-icon name="bulb-outline"></ion-icon>Princípios</a></li>
                     <li><a href="#"><ion-icon name="briefcase-outline"></ion-icon>Carreira</a></li>
@@ -67,23 +70,29 @@
         <div class="promises sr-element">
             <ion-icon name="checkmark-circle-outline"></ion-icon>
             <h1>PROMESSAS</h1>
-            <p>Ampliar o acesso à educação profissional de qualidade, incentivar a criação de startups e empresas de base tecnológica, investir em infraestrutura de tecnologia e internet para áreas rurais e periféricas.</p>
+            <p>Ampliar o acesso à educação profissional de qualidade, incentivar a criação de startups e empresas de
+                base tecnológica, investir em infraestrutura de tecnologia e internet para áreas rurais e periféricas.
+            </p>
         </div>
         <div class="ideology sr-element">
             <ion-icon name="globe-outline"></ion-icon>
             <h1>IDEOLOGIA</h1>
-            <p>Sou um político comprometido com o futuro do Ceará. Defendo tecnologia, educação e inovação para promover o desenvolvimento e oportunidades para todos, garantindo um futuro promissor para o nosso estado e sua população.</p>
+            <p>Sou um político comprometido com o futuro do Ceará. Defendo tecnologia, educação e inovação para promover
+                o desenvolvimento e oportunidades para todos, garantindo um futuro promissor para o nosso estado e sua
+                população.</p>
         </div>
         <div class="mission sr-element">
             <ion-icon name="flag-outline"></ion-icon>
             <h1>MISSÃO</h1>
-            <p>Construir um Ceará mais tecnológico, educado e inovador. O estado pode ser um polo de tecnologia e inovação, com acesso para todos desenvolverem suas habilidades e ideias, promovendo o crescimento econômico e social.</p>
+            <p>Construir um Ceará mais tecnológico, educado e inovador. O estado pode ser um polo de tecnologia e
+                inovação, com acesso para todos desenvolverem suas habilidades e ideias, promovendo o crescimento
+                econômico e social.</p>
         </div>
     </div>
 
     <section class="section-one sr-element">
         <h1>Propostas</h1>
-    
+
         <div class="row">
             <div class="col sr-element">
                 <h2>Ampliação do acesso à educação profissional de qualidade:</h2>
@@ -93,7 +102,7 @@
                     <li>Bolsas de estudo e programas de apoio</li>
                 </ul>
             </div>
-    
+
             <div class="col sr-element">
                 <h2>Incentivo à criação de startups e empresas de base tecnológica:</h2>
                 <ul>
@@ -101,7 +110,7 @@
                     <li>Programas de apoio à pesquisa e desenvolvimento</li>
                 </ul>
             </div>
-    
+
             <div class="col sr-element">
                 <h2>Investimento em infraestrutura de tecnologia e internet para áreas rurais e periféricas:</h2>
                 <ul>
@@ -112,44 +121,44 @@
             </div>
         </div>
     </section>
-    
+
 
     <section class="section-two sr-element">
         <h1>Partido</h1>
         <div class="section-two-container">
-                <img src="images/arthur.png" alt="">
+            <img src="images/arthur.png" alt="">
             <div class="two-text">
                 <h2>Filiação Partidária:</h2>
                 <ul>
                     <li>Filiado ao PPTC (Partido dos Profissionais de Tecnologia do Ceará).</li>
                 </ul>
-            
+
                 <h2>Compromissos do PPTC:</h2>
                 <ul>
                     <li>Promoção da educação profissional.</li>
                     <li>Incentivo ao uso da tecnologia como ferramenta de desenvolvimento.</li>
                     <li>Fomento à inovação como motor do progresso econômico e social.</li>
                 </ul>
-            
+
                 <h2>Objetivos Específicos:</h2>
                 <h3>Educação Profissional:</h3>
                 <ul>
                     <li>Implementação de programas de qualificação técnica e profissional.</li>
                     <li>Parcerias com instituições de ensino e empresas para oferta de estágios e cursos práticos.</li>
                 </ul>
-            
+
                 <h3>Tecnologia:</h3>
                 <ul>
                     <li>Investimento em infraestrutura tecnológica, incluindo internet de alta velocidade.</li>
                     <li>Apoio à criação e expansão de startups e empresas de base tecnológica.</li>
                 </ul>
-            
+
                 <h3>Inovação:</h3>
                 <ul>
                     <li>Criação de centros de inovação e incubadoras de empresas.</li>
                     <li>Incentivos fiscais e financeiros para projetos inovadores.</li>
                 </ul>
-            
+
                 <h2>Impacto Esperado:</h2>
                 <ul>
                     <li>Desenvolvimento econômico sustentável.</li>
@@ -172,26 +181,34 @@
         <div class="informations">
             <div class="political">
                 <img src="images/icons/conference.png" alt="">
-                <h2>Dircursos político</h2>
-                <p>156</p>
+                <h2>Discursos político</h2>
+                <p id="political-count">156</p>
             </div>
             <div class="members">
                 <img src="images/icons/group.png" alt="">
                 <h2>Membros</h2>
-                <p>2500</p>
+                <p id="members-count">2500</p>
             </div>
             <div class="donations">
                 <img src="images/icons/donation.png" alt="">
                 <h2>Doações</h2>
-                <p>156</p>
+                <p id="donations-count">156</p>
             </div>
             <div class="voters">
                 <img src="images/icons/voters.png" alt="">
                 <h2>Eleitores ativos</h2>
-                <p>156</p>
+                <p id="voters-count">156</p>
             </div>
         </div>
+
+        <div class="buttons">
+            <button id="mark-political-speech">Marcar discurso político</button>
+            <button id="become-member">Se tornar membro</button>
+            <button id="make-donation">Fazer doação</button>
+            <button id="become-active-voter">Se tornar um eleitor ativo</button>
+        </div>
     </section>
+    
 
     <section class="section-five sr-element">
         <h1>Biografia</h1>

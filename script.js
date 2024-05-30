@@ -1,3 +1,62 @@
+
+// Importação dos módulos Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, get, update, runTransaction } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+// Configuração do Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
+  authDomain: "arthur-schultz.firebaseapp.com",
+  projectId: "arthur-schultz",
+  storageBucket: "arthur-schultz.appspot.com",
+  messagingSenderId: "273634896292",
+  appId: "1:273634896292:web:0654cd33669194ded4b931",
+  measurementId: "G-C5G4446HG9"
+};
+
+// Inicializando o Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+async function updateCounts() {
+  const countsRef = ref(database, 'counts');
+  const snapshot = await get(countsRef);
+  const data = snapshot.val();
+  document.getElementById('political-count').innerText = data.political || 0;
+  document.getElementById('members-count').innerText = data.members || 0;
+  document.getElementById('donations-count').innerText = data.donations || 0;
+  document.getElementById('voters-count').innerText = data.voters || 0;
+}
+
+// Atualizar contadores ao carregar a página
+updateCounts();
+
+// Função para incrementar o contador
+function incrementCounter(counter) {
+  const counterRef = ref(database, `counts/${counter}`);
+  runTransaction(counterRef, (currentValue) => {
+      return (currentValue || 0) + 1;
+  }).then(updateCounts);
+}
+
+// Manipuladores de eventos para os botões
+document.getElementById('become-member').addEventListener('click', () => {
+  incrementCounter('members');
+});
+
+document.getElementById('make-donation').addEventListener('click', () => {
+  incrementCounter('donations');
+});
+
+document.getElementById('mark-political-speech').addEventListener('click', () => {
+  incrementCounter('political');
+});
+
+document.getElementById('become-active-voter').addEventListener('click', () => {
+  incrementCounter('voters');
+});
+
+
 document.addEventListener("DOMContentLoaded", function() {
   const restritoButton = document.getElementById('restrito');
   restritoButton.addEventListener("click", function() {
