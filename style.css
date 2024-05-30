@@ -260,7 +260,7 @@ p {
 .section-five p {
   color: rgb(0, 0, 0);
 }
-.section-four{
+.section-four {
   border-radius: 10px;
 }
 .section-four .conquistas {
@@ -516,8 +516,6 @@ p {
   margin-bottom: 20px;
   color: white;
 }
-
-
 
 .section-six h2 {
   text-align: center;
@@ -899,21 +897,7 @@ p {
     margin-bottom: 20px;
     width: 100%;
   }
-  .section-two-container {
-    flex-direction: column;
-    align-items: center; /* Centraliza os itens no eixo principal */
-  }
-
-  .section-two-container img,
-  .two-text {
-    width: 8  0%; /* Ajusta a largura para 80% em telas menores */
-    max-width: 100%; /* Remove a largura máxima */
-    margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
-  }
-
-  .two-text ul li {
-    width: 100%; /* Ajusta a largura dos itens da lista para 100% */
-  }
+  
 
   .section-four {
     height: auto;
@@ -982,7 +966,7 @@ p {
 
   .section-two-container img,
   .two-text {
-    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    width: 100%; /* Ajusta a largura para 80% em telas menores */
     max-width: 100%; /* Remove a largura máxima */
     margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
   }
