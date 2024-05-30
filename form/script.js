@@ -251,3 +251,4 @@ function excluirApoiador(key) {
         console.error('Erro ao excluir apoiador:', error);
     });
 }
+

@@ -15,7 +15,9 @@
 .no-scroll {
   overflow: hidden;
 }
-
+body{
+  background-color: #f1f1f1;
+}
 header {
   background-color: var(--fundo-color);
   color: #fff;
@@ -198,8 +200,8 @@ header {
   justify-content: space-evenly;
   align-items: center;
   background-color: #0464ab;
-  padding: 60px 10px;
   margin: 5px 0;
+  padding: 20px;
 }
 
 .informations-container ion-icon {
@@ -211,19 +213,19 @@ header {
 .promises,
 .ideology,
 .mission {
-  flex-basis: calc(33.33% - 20px);
+  flex-basis: calc(33.33% - 100px);
   text-align: center;
   margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: #ffffff;
   margin-bottom: 20px;
 }
 
 p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #ffffff;
 }
 
@@ -232,10 +234,11 @@ p {
 .section-tree,
 .section-four,
 .section-five,
-.campanhas,
 .section-eight {
   height: 50vh;
-  padding: 20px;
+  width: 90%;
+  margin: 50px auto;
+  
 }
 
 .section-one h1,
@@ -251,20 +254,6 @@ p {
   align-items: center;
 }
 
-.section-one h1::before,
-.section-two h1::before,
-.section-tree h1::before,
-.section-four h1::before,
-.section-five h1::before,
-.section-eight h1::before {
-  content: "";
-  display: inline-block;
-  height: 3px;
-  width: 30px;
-  background-color: rgb(21, 214, 82);
-  margin-right: 15px;
-}
-
 .section-one p,
 .section-two p,
 .section-tree p,
@@ -277,7 +266,64 @@ p {
   display: flex;
   align-items: center;
 }
+.section-two{
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 6px 6px rgba(37, 37, 37, 0.6) ;
+  height: auto;
+}
+.section-two-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+  margin-top: 20px;
+  justify-content: space-around;
+  width: 100%;
+}
 
+.section-two-container img {
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  width: 100%; /* Ajusta a largura para 100% em telas pequenas */
+  max-width: 60%; /* Define uma largura máxima para telas maiores */
+}
+
+.two-text {
+  width: 100%; /* Ajusta a largura para 100% em telas pequenas */
+  max-width: 35%; /* Define uma largura máxima para telas maiores */
+}
+
+.two-text h2 {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 5px;
+  margin-top: 20px;
+}
+
+.two-text h3 {
+  color: #0056b3;
+  margin-top: 15px;
+}
+
+.two-text ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.two-text ul li {
+  background: #fff;
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  list-style: disc;
+}
+
+.two-text ul li:hover {
+  background-color: #e9f5ff;
+}
 .section-four {
   background-color: #0464ab;
   display: flex;
@@ -285,6 +331,46 @@ p {
   justify-content: center;
   gap: 50px; /* Espaçamento entre os elementos */
   padding: 30px; /* Espaçamento interno */
+}
+.section-one{
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 6px 6px rgba(112, 112, 112, 0.5);
+
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.col {
+  flex: 1;
+  min-width: 250px; /* Ajuste conforme necessário */
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 6px #535353b3;
+}
+
+.col h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #007bff; /* Azul padrão */
+}
+
+.col ul {
+  padding: 0 20px;
+}
+
+.col ul li {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #555;
 }
 
 /* Estilos para o container de informações */
@@ -354,6 +440,25 @@ p {
   flex-direction: column;
   gap: 20px; /* Espaçamento entre os elementos */
   color: white;
+}
+.campanha-text h3 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.campanha-text h3::after {
+  content: "";
+  bottom: -10px; /* Ajuste conforme necessário */
+  left: 0;
+  width: 180px; /* Ajuste conforme necessário */
+  height: 3px; /* Ajuste conforme necessário */
+  background-color: #07ed50;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* Estilos para o container */
@@ -601,9 +706,6 @@ p {
   background-color: #03416d;
 }
 
-/* Footer Styles */
-/* Footer Styles */
-/* Footer Styles */
 .footer {
   background: linear-gradient(45deg, #0464ab, #03416d);
   color: #fff;
@@ -733,7 +835,15 @@ p {
     height: 100%;
     z-index: 999;
   }
-
+  .section-one,
+  .section-two,
+  .section-tree,
+  .section-four,
+  .section-five,
+  .campanhas,
+  .section-eight{
+    height: auto;
+  } 
   .nav-links.active li:not(:first-child) {
     padding: 10px;
     margin: 20px 0;
@@ -762,14 +872,10 @@ p {
   }
   .nav-links li a {
     display: flex;
-    align-items:flex-end;
+    align-items: flex-end;
     gap: 5px;
   }
-#login-link,
-#register-link,
-#logout-link{
-  margin: 0 10px;
-}
+  
   .slider-container {
     height: 100vh;
   }
@@ -786,7 +892,7 @@ p {
   }
   .informations-container {
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 100px;
     height: auto;
     gap: 20px;
   }
@@ -797,7 +903,22 @@ p {
     margin-bottom: 20px;
     width: 100%;
   }
+  .section-two-container {
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens no eixo principal */
+  }
 
+  .section-two-container img,
+  .two-text {
+    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    max-width: 100%; /* Remove a largura máxima */
+    margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
+  }
+
+  .two-text ul li {
+    width: 100%; /* Ajusta a largura dos itens da lista para 100% */
+  }
+}
   .section-four {
     height: auto;
   }
@@ -965,7 +1086,7 @@ p {
   }
   .nav-links li a {
     display: flex;
-    align-items:flex-end;
+    align-items: flex-end;
     gap: 5px;
   }
   .slider-container {
@@ -973,7 +1094,7 @@ p {
   }
   #login-link,
   #register-link,
-  #logout-link{
+  #logout-link {
     margin: 0 10px;
   }
   .slide-content {
