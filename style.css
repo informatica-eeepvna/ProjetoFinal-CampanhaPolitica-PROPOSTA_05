@@ -15,7 +15,7 @@
 .no-scroll {
   overflow: hidden;
 }
-body{
+body {
   background-color: #f1f1f1;
 }
 header {
@@ -238,7 +238,6 @@ p {
   height: 50vh;
   width: 90%;
   margin: 50px auto;
-  
 }
 
 .section-one h1,
@@ -261,16 +260,20 @@ p {
 .section-five p {
   color: rgb(0, 0, 0);
 }
-
-.conquistas {
+.section-four{
+  border-radius: 10px;
+}
+.section-four .conquistas {
   display: flex;
   align-items: center;
+  color: white;
 }
-.section-two{
+
+.section-two {
   background-color: #fff;
   padding: 50px;
   border-radius: 8px;
-  box-shadow: 0 6px 6px rgba(37, 37, 37, 0.6) ;
+  box-shadow: 0 6px 6px rgba(37, 37, 37, 0.6);
   height: auto;
 }
 .section-two-container {
@@ -332,12 +335,11 @@ p {
   gap: 50px; /* Espaçamento entre os elementos */
   padding: 30px; /* Espaçamento interno */
 }
-.section-one{
+.section-one {
   background-color: #fff;
   padding: 50px;
   border-radius: 8px;
   box-shadow: 0 6px 6px rgba(112, 112, 112, 0.5);
-
 }
 .row {
   display: flex;
@@ -512,16 +514,10 @@ p {
 .section-six h1 {
   text-align: center;
   margin-bottom: 20px;
+  color: white;
 }
 
-.section-six h1::before {
-  content: "";
-  display: inline-block;
-  height: 3px;
-  width: 30px;
-  background-color: rgb(21, 214, 82);
-  margin-right: 15px;
-}
+
 
 .section-six h2 {
   text-align: center;
@@ -700,6 +696,7 @@ p {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  font-size: 18px;
 }
 
 .contact button:hover {
@@ -830,10 +827,9 @@ p {
     top: 95px;
     background-color: #585858;
     width: 60%;
-    z-index: 1;
     left: 40%;
     height: 100%;
-    z-index: 999;
+    z-index: 9999; /* Valor alto para garantir que fique por cima */
   }
   .section-one,
   .section-two,
@@ -841,9 +837,9 @@ p {
   .section-four,
   .section-five,
   .campanhas,
-  .section-eight{
+  .section-eight {
     height: auto;
-  } 
+  }
   .nav-links.active li:not(:first-child) {
     padding: 10px;
     margin: 20px 0;
@@ -875,7 +871,7 @@ p {
     align-items: flex-end;
     gap: 5px;
   }
-  
+
   .slider-container {
     height: 100vh;
   }
@@ -910,7 +906,7 @@ p {
 
   .section-two-container img,
   .two-text {
-    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    width: 8  0%; /* Ajusta a largura para 80% em telas menores */
     max-width: 100%; /* Remove a largura máxima */
     margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
   }
@@ -918,7 +914,7 @@ p {
   .two-text ul li {
     width: 100%; /* Ajusta a largura dos itens da lista para 100% */
   }
-}
+
   .section-four {
     height: auto;
   }
@@ -978,6 +974,21 @@ p {
 
   .label {
     font-size: 12px; /* Reduz o tamanho da fonte */
+  }
+  .section-two-container {
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens no eixo principal */
+  }
+
+  .section-two-container img,
+  .two-text {
+    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    max-width: 100%; /* Remove a largura máxima */
+    margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
+  }
+
+  .two-text ul li {
+    width: 100%; /* Ajusta a largura dos itens da lista para 100% */
   }
 
   .section-eight {
@@ -1052,7 +1063,6 @@ p {
     top: 95px;
     background-color: #585858;
     width: 60%;
-    z-index: 1;
     left: 40%;
     height: 100%;
     z-index: 999;
@@ -1119,6 +1129,32 @@ p {
     width: 70%;
   }
 
+  .section-one,
+  .section-two,
+  .section-tree,
+  .section-four,
+  .section-five,
+  .campanhas,
+  .section-eight {
+    height: auto;
+  }
+  .section-two-container {
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens no eixo principal */
+  }
+
+  .section-two-container img,
+  .two-text {
+    width: 80%; /* Ajusta a largura para 80% em telas menores */
+    max-width: 100%; /* Remove a largura máxima */
+    margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
+  }
+  .two-text {
+    max-width: 100%;
+  }
+  .two-text ul li {
+    width: 100%; /* Ajusta a largura dos itens da lista para 100% */
+  }
   .section-four {
     height: auto;
   }
@@ -1211,311 +1247,6 @@ p {
   .footer-section-links,
   .footer-section-contact {
     min-width: 200px;
-  }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1023px) {
-  header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-  }
-
-  .logo {
-    margin-right: auto; /* Coloca a logo no lado esquerdo */
-  }
-  .nav-links li {
-    margin-right: 15px;
-  }
-  .nav-links .login-btn,
-  .nav-links .cadastro-btn {
-    margin: 0;
-    padding: 9px 14px;
-  }
-
-  .slider-container {
-    height: 100vh;
-  }
-
-  .slide-content {
-    top: 60%;
-  }
-
-  .slider-container .slide img {
-    object-position: bottom;
-  }
-  .dots-container {
-    bottom: -35px;
-  }
-  .informations-container {
-    flex-direction: column;
-    padding: 20px;
-    height: 100vh;
-  }
-
-  .promises,
-  .ideology,
-  .mission {
-    margin-bottom: 20px;
-    width: 70%;
-  }
-
-  .section-four {
-    height: auto;
-  }
-
-  .informations {
-    flex-direction: column; /* Altera para layout de coluna em telas menores */
-    text-align: center; /* Centraliza o texto */
-  }
-
-  .political,
-  .members,
-  .donations,
-  .voters {
-    width: 100%; /* Ocupa a largura total do container */
-    max-width: none; /* Remove a largura máxima */
-    margin-bottom: 10px; /* Reduz o espaçamento na parte inferior */
-  }
-
-  .polical img,
-  .members img,
-  .donations img,
-  .voters img {
-    max-width: 80px; /* Reduz a largura máxima das imagens */
-  }
-
-  .campanhas {
-    padding: 20px; /* Reduz o espaçamento interno */
-  }
-
-  .campanha-text {
-    gap: 20px; /* Reduz o espaçamento entre os elementos */
-  }
-  .campanha-text h2 {
-    font-size: 28px;
-  }
-  .campanha-text h3 {
-    font-size: 20px;
-    font-weight: 100;
-  }
-
-  .clock {
-    gap: 15px; /* Reduz o espaçamento entre os elementos */
-  }
-
-  .days,
-  .hours,
-  .minutes,
-  .seconds {
-    max-width: 90px; /* Reduz o tamanho dos relógios */
-    max-height: 90px;
-    font-size: 20px; /* Reduz o tamanho da fonte */
-  }
-
-  .value {
-    font-size: 24px; /* Reduz o tamanho da fonte */
-  }
-
-  .label {
-    font-size: 12px; /* Reduz o tamanho da fonte */
-  }
-
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 0; /* Adiciona espaçamento interno superior e inferior */
-  }
-
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    flex-direction: column;
-    overflow: auto;
-  }
-
-  /* Estilos para o perfil do usuário */
-  .profile img {
-    width: 30px; /* Reduz o tamanho da imagem */
-    height: 30px; /* Reduz o tamanho da imagem */
-  }
-
-  .profile h3 {
-    font-size: 14px; /* Reduz o tamanho da fonte */
-  }
-  .footer-content {
-    flex-direction: column;
-  }
-
-  .footer-section-about,
-  .footer-section-links,
-  .footer-section-contact {
-    padding: 10px;
-  }
-}
-
-@media only screen and (min-width: 767px) and (max-width: 991px) {
-  header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-  }
-
-  .logo {
-    margin-right: auto; /* Coloca a logo no lado esquerdo */
-  }
-
-  .menu-toggle.active {
-    margin-left: auto; /* Coloca o menu toggle no lado direito */
-    background-color: transparent;
-  }
-  .menu-toggle ion-icon {
-    font-size: 32px; /* Tamanho desejado para o ícone de menu */
-    display: block;
-  }
-
-  .nav-links {
-    display: none; /* Esconde a lista de navegação em telas menores ou iguais a 768px */
-  }
-
-  .menu-toggle nav {
-    display: none;
-  }
-
-  .menu-toggle.active nav {
-    display: block; /* Exibe a lista de navegação quando o menu está aberto */
-  }
-
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 92px;
-    background-color: #2c2a2a;
-    width: 60%;
-    z-index: 1;
-    left: 40%;
-  }
-
-  .nav-links.active li {
-    padding: 10px;
-    margin: 0;
-    text-align: end;
-  }
-  .slider-container {
-    height: 100vh;
-  }
-
-  .slide-content {
-    top: 60%;
-  }
-
-  .slider-container .slide img {
-    object-position: bottom;
-  }
-  .dots-container {
-    bottom: -35px;
-  }
-  .informations-container {
-    padding: 20px;
-    height: auto;
-  }
-
-  .promises,
-  .ideology,
-  .mission {
-    margin-bottom: 20px;
-    width: 70%;
-  }
-
-  .section-four {
-    height: auto;
-  }
-
-  .informations {
-    text-align: center; /* Centraliza o texto */
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-
-  .political,
-  .members,
-  .donations,
-  .voters {
-    width: 25%; /* Ocupa a largura total do container */
-    margin-bottom: 20px; /* Reduz o espaçamento na parte inferior */
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .polical img,
-  .members img,
-  .donations img,
-  .voters img {
-    max-width: 80px; /* Reduz a largura máxima das imagens */
-  }
-
-  .campanhas {
-    padding: 20px; /* Reduz o espaçamento interno */
-  }
-
-  .campanha-text {
-    gap: 20px; /* Reduz o espaçamento entre os elementos */
-  }
-  .campanha-text h2 {
-    font-size: 28px;
-  }
-  .campanha-text h3 {
-    font-size: 25px;
-    font-weight: 100;
-  }
-
-  .clock {
-    gap: 20px; /* Reduz o espaçamento entre os elementos */
-  }
-
-  .days,
-  .hours,
-  .minutes,
-  .seconds {
-    max-width: 120px; /* Reduz o tamanho dos relógios */
-    max-height: 120px;
-  }
-
-  .value {
-    font-size: 24px; /* Reduz o tamanho da fonte */
-  }
-
-  .label {
-    font-size: 14px; /* Reduz o tamanho da fonte */
-  }
-
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 0; /* Adiciona espaçamento interno superior e inferior */
-  }
-
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    flex-direction: column;
-    overflow: auto;
-  }
-
-  /* Estilos para o perfil do usuário */
-  .profile img {
-    width: 30px; /* Reduz o tamanho da imagem */
-    height: 30px; /* Reduz o tamanho da imagem */
-  }
-
-  .profile h3 {
-    font-size: 18px; /* Reduz o tamanho da fonte */
-  }
-
-  .footer-content {
-    padding: 10px;
   }
 }
 

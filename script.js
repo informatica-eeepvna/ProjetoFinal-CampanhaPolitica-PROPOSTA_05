@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Bloqueia ou desbloqueia a rolagem do corpo da página
     if (menuToggle.classList.contains("active")) {
         document.body.classList.add("no-scroll");
+        
     } else {
         document.body.classList.remove("no-scroll");
     }
