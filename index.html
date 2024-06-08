@@ -11,7 +11,8 @@
     <link rel="shortcut icon" href="images/LogoTipo.png" type="image/x-icon">
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <title>Arthur Shutz</title>
 </head>
 
@@ -23,7 +24,7 @@
             <nav>
                 <ul class="nav-links">
                     <li>
-                        <button id="restrito">Area Admin</button>
+                        <button id="restrito">Area Restrita</button>
                     </li>
 
                     <li><a href="#"><ion-icon name="home-outline"></ion-icon>Home</a></li>
@@ -170,7 +171,7 @@
         </div>
     </section>
 
-    <section class="section-tree sr-element">
+    <section class="section-tree sr-element" id="section-carreira">
         <h1>Carreira</h1>
         <p>Texto</p>
     </section>
@@ -210,7 +211,7 @@
     </section>
     
 
-    <section class="section-five sr-element">
+    <section class="section-five sr-element" id="section-biografia">
         <h1>Biografia</h1>
 
         <div class="sections-five">
@@ -349,17 +350,17 @@
             <div class="footer-section-links">
                 <h2>Links Rápidos</h2>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Princípios</a></li>
-                    <li><a href="#">Carreira</a></li>
-                    <li><a href="#">Biografia</a></li>
-                    <li><a href="#">Simulador</a></li>
+                    <li><a href="#" id="ir-home">Home</a></li>
+                    <li><a href="" id="ir-principios">Princípios</a></li>
+                    <li><a href="#section-carreira" id="ir-carreira">Carreira</a></li>
+                    <li><a href="#section-biografia" id="ir-biografia">Biografia</a></li>
+                    <li><a href="simulador/index.html">Simulador</a></li>
                 </ul>
             </div>
             <div class="footer-section-contact">
                 <h2>Contato</h2>
                 <p>Email: contato@arthurshutz.com</p>
-                <p>Telefone: (88) 99999-9999</p>
+                <p>Telefone: +55 (85) 9769-0871</p>
                 <div class="social-media">
                     <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
                     <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>

@@ -44,14 +44,23 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const auth = getAuth(app);
-
+    
+    function formatarData(dataNascimento) {
+      // Formatar a data para o formato YYYY-MM-DD
+      const partesData = dataNascimento.split('/');
+      const dataFormatada = partesData[2] + '-' + partesData[1] + '-' + partesData[0];
+      return dataFormatada;
+    }
     document.getElementById("registroForm").addEventListener('submit', function (e) {
       e.preventDefault();
 
       const nome = document.getElementById("nome").value;
-      const dataNascimento = document.getElementById("dataNascimento").value;
+      const dataNascimentoInput = document.getElementById("dataNascimento").value;
       const email = document.getElementById("email").value;
       const senha = document.getElementById("senha").value;
+
+      // Formatar a data de nascimento para o formato YYYY-MM-DD
+      const dataNascimento = formatarData(dataNascimentoInput);
 
       // Verificar se o email já está cadastrado
       const usersRef = ref(db, 'users');

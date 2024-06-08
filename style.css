@@ -9,12 +9,16 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
+html{
+  scroll-behavior: smooth;
+}
 .sr-element {
   visibility: hidden;
 }
 .no-scroll {
   overflow: hidden;
 }
+
 body {
   background-color: #f1f1f1;
 }
@@ -100,7 +104,7 @@ header {
 }
 
 .nav-links button {
-  background-color: #ae330e; /* Verde */
+  background-color: #53ae0e; /* Verde */
   border: none;
   color: white;
   padding: 10px 20px;
@@ -110,7 +114,7 @@ header {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .nav-links button:hover {
@@ -432,7 +436,6 @@ p {
 .informations p {
   color: white;
 }
-
 
 .sections-five {
   display: grid;
@@ -846,11 +849,12 @@ p {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 95px;
+    top: 90px;
     background-color: #585858;
-    width: 60%;
-    left: 40%;
-    height: 100%;
+    width: 100%;
+    left: 0;
+    height: auto;
+    padding: 20px 0;
     z-index: 9999; /* Valor alto para garantir que fique por cima */
   }
   .section-one,
@@ -895,18 +899,20 @@ p {
   }
 
   .slider-container {
-    height: 100vh;
+    height: 90vh;
   }
-
+  .slider-container .slide {
+    height: auto;
+  }
   .slide-content {
     top: 60%;
   }
 
   .slider-container .slide img {
-    object-position: bottom;
+    object-position: center;
   }
   .dots-container {
-    bottom: -35px;
+    bottom: -80px;
   }
   .informations-container {
     flex-direction: column;
@@ -921,8 +927,27 @@ p {
     margin-bottom: 20px;
     width: 100%;
   }
+  .promises p,
+  .ideology p,
+  .mission p {
+    font-size: 16px;
+    text-align: justify;
+  }
+  .section-one {
+    margin: 20px auto;
+    padding: 30px 20px;
+  }
+  .section-one .row {
+    gap: 25px;
+  }
+  .section-one .col {
+    margin: 0;
+    padding: 10px;
+  }
+  .section-one .col h2{
+    font-size: 1.3rem;
+  }
   
-
   .section-four {
     height: auto;
   }
@@ -931,7 +956,9 @@ p {
     flex-direction: column; /* Altera para layout de coluna em telas menores */
     text-align: center; /* Centraliza o texto */
   }
-
+  .informations-container {
+    padding: 20px 40px;
+  }
   .political,
   .members,
   .donations,

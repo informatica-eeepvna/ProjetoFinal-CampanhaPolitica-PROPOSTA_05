@@ -55,9 +55,10 @@
             const user = Object.values(users).find(user => user.email === email);
             // Verificar se a senha está correta
             if (user.senha === senha) {
-              // Armazenar as informações do usuário autenticado no localStorage
+              // Armazenar o UID do usuário nos cookies
               alert('Login bem-sucedido!');
-              window.location.href = "../../form/index.html";
+              // Redirecionar para a página de área administrativa
+              window.location.href = "../areaAdmin.html";
             } else {
               alert('Senha incorreta. Tente novamente.');
             }
@@ -72,6 +73,7 @@
         alert('Erro ao fazer login. Tente novamente mais tarde.');
       }
     });
+
   </script>
 
 </body>

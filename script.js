@@ -60,10 +60,9 @@ document.getElementById('become-active-voter').addEventListener('click', () => {
 document.addEventListener("DOMContentLoaded", function() {
   const restritoButton = document.getElementById('restrito');
   restritoButton.addEventListener("click", function() {
-      window.location.href = "./form/index.html";
+      window.location.href = "./area-admin/areaAdmin.html";
   });
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector(".menu-toggle");
