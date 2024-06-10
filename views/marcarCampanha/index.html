@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +16,10 @@
             height: 100vh;
             margin: 0;
         }
-
         h1 {
             text-align: center;
             color: #333;
         }
-
         form {
             background: #fff;
             padding: 20px;
@@ -31,13 +28,11 @@
             max-width: 400px;
             width: 100%;
         }
-
         label {
             display: block;
             margin-bottom: 8px;
             color: #555;
         }
-
         input {
             width: calc(100% - 22px);
             padding: 10px;
@@ -46,7 +41,6 @@
             border-radius: 4px;
             font-size: 16px;
         }
-
         button {
             width: 100%;
             padding: 12px;
@@ -57,35 +51,27 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
-
 <body>
     <form id="updateCampanhaForm">
         <h1>Atualizar Campanha</h1>
         <label for="rua">Nome da Rua:</label>
         <input type="text" id="rua" name="rua" required>
-
         <label for="dias">Dias:</label>
         <input type="number" id="dias" name="dias" required>
-
         <label for="horas">Horas:</label>
         <input type="number" id="horas" name="horas" required>
-
         <label for="minutos">Minutos:</label>
         <input type="number" id="minutos" name="minutos" required>
-
         <label for="segundos">Segundos:</label>
         <input type="number" id="segundos" name="segundos" required>
-
         <button type="submit">Atualizar Campanha</button>
     </form>
 
-    <!-- Script para atualizar a campanha no Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
@@ -114,26 +100,23 @@
             const minutos = document.getElementById("minutos").value;
             const segundos = document.getElementById("segundos").value;
 
-            const campanhaRef = ref(database, 'campanha');
-
+            const campanhaRef = ref(database, "campanha");
             set(campanhaRef, {
                 rua: rua,
-                dias: dias,
-                horas: horas,
-                minutos: minutos,
-                segundos: segundos
+                dias: parseInt(dias),
+                horas: parseInt(horas),
+                minutos: parseInt(minutos),
+                segundos: parseInt(segundos)
             })
-                .then(() => {
-                    alert('Campanha atualizada com sucesso!');
-                    // Opcional: Limpe o formulário após o envio
-                    document.getElementById("updateCampanhaForm").reset();
-                })
-                .catch((error) => {
-                    console.error('Erro ao atualizar campanha:', error);
-                    alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
-                });
+            .then(() => {
+                alert('Campanha atualizada com sucesso!');
+                document.getElementById("updateCampanhaForm").reset();
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar campanha:', error);
+                alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
+            });
         });
     </script>
 </body>
-
 </html>
