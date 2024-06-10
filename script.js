@@ -152,72 +152,91 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentSlide);
   }, 5000);
 
-  const campanhaRef = ref(db, "campanha");
+  const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const campanhaRef = ref(db, "campanha");
+let countdownTimeout; // Variável para armazenar o timeout
+
+// Função para adicionar um zero à esquerda se o valor for menor que 10
+function padValue(value) {
+    return value < 10 ? `0${value}` : value;
+}
+
+// Função para iniciar a contagem regressiva
+function startCountdown(campanha) {
+    // Convertendo os valores para números inteiros
+    let dias = parseInt(campanha.dias);
+    let horas = parseInt(campanha.horas);
+    let minutos = parseInt(campanha.minutos);
+    let segundos = parseInt(campanha.segundos);
+
+    // Verificar se os valores são válidos, se não, definir como zero
+    dias = isNaN(dias) ? 0 : dias;
+    horas = isNaN(horas) ? 0 : horas;
+    minutos = isNaN(minutos) ? 0 : minutos;
+    segundos = isNaN(segundos) ? 0 : segundos;
+
+    // Calculando o total de segundos
+    let totalSeconds = dias * 24 * 60 * 60 + horas * 60 * 60 + minutos * 60 + segundos;
+
+    let countdownInterval = setInterval(() => {
+        if (totalSeconds > 0) {
+            totalSeconds--;
+
+            // Calcular os novos valores de dias, horas, minutos e segundos
+            dias = Math.floor(totalSeconds / (24 * 60 * 60));
+            horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+            minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
+            segundos = totalSeconds % 60;
+
+            // Atualizar os elementos HTML com os novos valores
+            document.getElementById("dias").innerText = padValue(dias);
+            document.getElementById("horas").innerText = padValue(horas);
+            document.getElementById("minutos").innerText = padValue(minutos);
+            document.getElementById("segundos").innerText = padValue(segundos);
+
+            // Atualizar os valores no Realtime Database a cada segundo
+            set(campanhaRef, {
+                rua: campanha.rua,
+                dias: dias.toString(),
+                horas: horas.toString(),
+                minutos: minutos.toString(),
+                segundos: segundos.toString(),
+            });
+        } else {
+            clearInterval(countdownInterval);
+            // Lógica para quando a contagem chegar a zero
+            alert("Contagem regressiva encerrada!");
+        }
+    }, 1000);
+}
 
 // Monitorando alterações no nó 'campanha'
 onValue(campanhaRef, (snapshot) => {
-  const campanha = snapshot.val();
-  if (campanha) {
-    document.getElementById("campanha-local").innerText = campanha.rua;
+    const campanha = snapshot.val();
+    if (campanha) {
+        document.getElementById("campanha-local").innerText = campanha.rua;
 
-    // Função para iniciar a contagem regressiva
-    function startCountdown() {
-      // Convertendo os valores para números inteiros
-      let dias = parseInt(campanha.dias);
-      let horas = parseInt(campanha.horas);
-      let minutos = parseInt(campanha.minutos);
-      let segundos = parseInt(campanha.segundos);
+        // Verificar se há valores válidos para iniciar a contagem regressiva
+        if (
+            campanha.dias !== undefined &&
+            campanha.horas !== undefined &&
+            campanha.minutos !== undefined &&
+            campanha.segundos !== undefined
+        ) {
+            // Cancelar o timeout anterior, se houver
+            clearTimeout(countdownTimeout);
 
-      // Calculando o total de segundos
-      let totalSeconds = dias * 24 * 60 * 60 +
-        horas * 60 * 60 +
-        minutos * 60 +
-        segundos;
-
-      let countdownInterval = setInterval(() => {
-        if (totalSeconds > 0) {
-          totalSeconds--;
-
-          // Calcular os novos valores de dias, horas, minutos e segundos
-          dias = Math.floor(totalSeconds / (24 * 60 * 60));
-          horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-          minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
-          segundos = totalSeconds % 60;
-
-          // Atualizar os elementos HTML com os novos valores
-          document.getElementById("dias").innerText = dias < 10 ? `0${dias}` : dias;
-          document.getElementById("horas").innerText = horas < 10 ? `0${horas}` : horas;
-          document.getElementById("minutos").innerText = minutos < 10 ? `0${minutos}` : minutos;
-          document.getElementById("segundos").innerText = segundos < 10 ? `0${segundos}` : segundos;
-
-          // Atualizar os valores no Realtime Database a cada segundo
-          set(campanhaRef, {
-            rua: campanha.rua,
-            dias: dias.toString(),
-            horas: horas.toString(),
-            minutos: minutos.toString(),
-            segundos: segundos.toString()
-          });
-        } else {
-          clearInterval(countdownInterval);
-          // Lógica para quando a contagem chegar a zero
-          alert('Contagem regressiva encerrada!');
+            // Agendar o início da contagem regressiva após um breve atraso
+            countdownTimeout = setTimeout(() => {
+                startCountdown(campanha);
+            }, 1000); // Aguarde 1 segundo antes de iniciar a contagem regressiva novamente
         }
-      }, 1000);
+    } else {
+        document.getElementById("campanha-local").innerText = "Nenhuma campanha configurada";
     }
-
-    // Iniciar a contagem regressiva
-    startCountdown();
-  } else {
-    document.getElementById("campanha-local").innerText =
-      "Nenhuma campanha configurada";
-  }
 });
-
-
-
-
-
 
   const sr = ScrollReveal({
     origin: "bottom",

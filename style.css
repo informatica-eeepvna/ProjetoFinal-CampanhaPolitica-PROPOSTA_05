@@ -9,7 +9,7 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
-html{
+html {
   scroll-behavior: smooth;
 }
 .sr-element {
@@ -270,8 +270,7 @@ p {
 }
 .section-four .buttons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-around;
   margin-top: 20px;
   flex-wrap: wrap; /* Adicionado para permitir quebra de linha */
 }
@@ -286,10 +285,6 @@ p {
   transition: background-color 0.3s ease;
   flex: 1 1 calc(50% - 40px); /* Ajusta a largura dos botões */
   max-width: 200px; /* Limite de largura máxima */
-}
-
-.section-four .buttons button:hover {
-  background-color: #1f6b25;
 }
 .section-four .conquistas {
   display: flex;
@@ -513,10 +508,10 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid #07ed50;
+  border: 2px solid #07ed50;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   justify-content: center;
   color: white;
 }
@@ -598,7 +593,6 @@ p {
   height: 50vh;
 }
 
-/* Estilos para o contêiner de comentários */
 .container-comments {
   background-color: #0464ab;
   height: 100%;
@@ -607,27 +601,38 @@ p {
   align-items: center;
   padding: 15px;
   border-radius: 10px;
+  overflow-x: auto; /* Adiciona rolagem horizontal */
+  white-space: nowrap; /* Evita que os comentários quebrem para a próxima linha */
 }
 
 /* Estilos para o contêiner de comentários e comentários */
 .comment {
   background-color: rgb(255, 255, 255);
-  height: auto; /* Altura automática para acomodar o conteúdo */
+  height: 90%; /* Altura fixa */
+  width: auto; /* Largura fixa */
   padding: 10px 20px;
-  gap: 20px;
-  display: flex;
-  flex-direction: column;
+  gap: 25px;
+  display: inline-block; /* Alinha os comentários em linha */
+  vertical-align: top; /* Alinha os comentários ao topo */
   border-radius: 10px;
-  overflow: auto;
+  overflow: hidden;
+  white-space: normal; /* Permite quebra de linha dentro dos comentários */
+  box-sizing: border-box; /* Inclui padding e border na largura e altura total */
+  margin-right: 15px;
 }
 .comment p {
   color: black;
   text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona reticências (...) se o texto for muito longo */
 }
 
 /* Estilos para o título do comentário */
 .comment h3 {
   position: relative;
+  white-space: nowrap; /* Impede quebra de linha no título */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona reticências (...) se o título for muito longo */
 }
 
 .comment h3::after {
@@ -645,8 +650,10 @@ p {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  background-color: #ffc200;
+  padding: 5px;
+  border-radius: 1rem;
 }
-
 .profile img {
   width: 40px; /* Reduz o tamanho da imagem */
   height: 40px; /* Reduz o tamanho da imagem */
@@ -659,6 +666,9 @@ p {
   margin: 0;
   font-size: 16px; /* Reduz o tamanho da fonte */
   color: #333;
+  white-space: nowrap; /* Impede quebra de linha no nome do perfil */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona reticências (...) se o nome for muito longo */
 }
 
 .contact {
@@ -705,10 +715,14 @@ p {
 .contact textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffc200;
   border-radius: 5px;
 }
-
+.contact input[type="text"]:focus,
+.contact input[type="email"]:focus,
+.contact textarea:focus {
+  outline: #ffc200;
+}
 .contact textarea {
   height: 150px;
 }
@@ -862,8 +876,7 @@ p {
   .section-tree,
   .section-four,
   .section-five,
-  .campanhas,
-  .section-eight {
+  .campanhas {
     height: auto;
   }
   .nav-links.active li:not(:first-child) {
@@ -912,7 +925,7 @@ p {
     object-position: center;
   }
   .dots-container {
-    bottom: -80px;
+    bottom: -40px;
   }
   .informations-container {
     flex-direction: column;
@@ -944,12 +957,19 @@ p {
     margin: 0;
     padding: 10px;
   }
-  .section-one .col h2{
+  .section-one .col h2 {
     font-size: 1.3rem;
   }
-  
+
   .section-four {
     height: auto;
+  }
+  .section-four .buttons {
+    gap: 20px;
+  }
+  .section-four .buttons button {
+    background-color: #ffc200;
+    color: black;
   }
 
   .informations {
@@ -965,18 +985,26 @@ p {
   .voters {
     width: 100%; /* Ocupa a largura total do container */
     max-width: none; /* Remove a largura máxima */
-    margin-bottom: 10px; /* Reduz o espaçamento na parte inferior */
+    margin-bottom: 20px; /* Reduz o espaçamento na parte inferior */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .informations h2 {
+    font-size: 1.3rem;
   }
 
   .polical img,
   .members img,
   .donations img,
   .voters img {
-    max-width: 80px; /* Reduz a largura máxima das imagens */
+    width: auto; /* Reduz a largura máxima das imagens */
   }
 
   .campanhas {
-    padding: 20px; /* Reduz o espaçamento interno */
+    padding: 20px;
+    gap: 15px; /* Reduz o espaçamento interno */
   }
 
   .campanha-text {
@@ -990,21 +1018,16 @@ p {
     font-weight: 100;
   }
 
-  .clock {
-    gap: 15px; /* Reduz o espaçamento entre os elementos */
-  }
-
   .days,
   .hours,
   .minutes,
   .seconds {
-    width: 75px; /* Reduz o tamanho dos relógios */
-    height: 75px;
-    font-size: 20px; /* Reduz o tamanho da fonte */
+    width: 70px; /* Reduz o tamanho dos relógios */
+    height: 70px;
   }
 
   .value {
-    font-size: 24px; /* Reduz o tamanho da fonte */
+    font-size: 20px; /* Reduz o tamanho da fonte */
   }
 
   .label {
@@ -1026,16 +1049,15 @@ p {
     width: 100%; /* Ajusta a largura dos itens da lista para 100% */
   }
 
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 0; /* Adiciona espaçamento interno superior e inferior */
+  .container-comments {
+    display: block;
+    overflow-x: auto; /* Garante rolagem horizontal */
+    white-space: nowrap; /* Evita quebra de linha */
   }
 
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    flex-direction: column;
-    overflow: auto;
+  .comment {
+    display: inline-block; /* Garante que os comentários fiquem em linha */
+    height: 100%;
   }
 
   /* Estilos para o perfil do usuário */
@@ -1146,7 +1168,7 @@ p {
     object-position: bottom;
   }
   .dots-container {
-    bottom: -35px;
+    bottom: -30px;
   }
   .informations-container {
     padding: 20px;
@@ -1165,8 +1187,7 @@ p {
   .section-tree,
   .section-four,
   .section-five,
-  .campanhas,
-  .section-eight {
+  .campanhas {
     height: auto;
   }
   .section-two-container {
@@ -1249,16 +1270,15 @@ p {
     font-size: 14px; /* Reduz o tamanho da fonte */
   }
 
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 0; /* Adiciona espaçamento interno superior e inferior */
+  .container-comments {
+    display: block;
+    overflow-x: auto; /* Garante rolagem horizontal */
+    white-space: nowrap; /* Evita quebra de linha */
   }
 
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    flex-direction: column;
-    overflow: auto;
+  .comment {
+    display: inline-block; /* Garante que os comentários fiquem em linha */
+    height: 100%;
   }
 
   /* Estilos para o perfil do usuário */
@@ -1388,17 +1408,18 @@ p {
   .label {
     font-size: 18px; /* Reduz o tamanho da fonte */
   }
-
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 0; /* Adiciona espaçamento interno superior e inferior */
+  
+  .container-comments {
+    display: block;
+    overflow-x: auto; /* Garante rolagem horizontal */
+    white-space: nowrap; /* Evita quebra de linha */
+    
   }
 
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    flex-direction: column;
-    overflow: auto;
+  .comment {
+    display: inline-block; /* Garante que os comentários fiquem em linha */
+    height: 100%;
+
   }
 
   /* Estilos para o perfil do usuário */
@@ -1521,16 +1542,17 @@ p {
   .label {
     font-size: 14px; /* Reduz o tamanho da fonte */
   }
-
-  .section-eight {
-    height: auto; /* Altura automática para acomodar o conteúdo */
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
+  .container-comments {
+    display: block;
+    overflow-x: auto; /* Garante rolagem horizontal */
+    white-space: nowrap; /* Evita quebra de linha */
+    
   }
 
-  /* Estilos para o contêiner de comentários */
-  .container-comments {
-    padding: 20px 10px; /* Adiciona espaçamento interno superior e inferior */
-    overflow: auto;
+  .comment {
+    display: inline-block; /* Garante que os comentários fiquem em linha */
+    height: 100%;
+
   }
 
   /* Estilos para o perfil do usuário */
