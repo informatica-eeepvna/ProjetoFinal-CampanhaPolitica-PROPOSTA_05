@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Próxima Campanha</title>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="updateCampanhaForm">
+        <h1>Atualizar Campanha</h1>
+        <label for="rua">Nome da Rua:</label>
+        <input type="text" id="rua" name="rua" required>
+
+        <label for="dias">Dias:</label>
+        <input type="number" id="dias" name="dias" required>
+
+        <label for="horas">Horas:</label>
+        <input type="number" id="horas" name="horas" required>
+
+        <label for="minutos">Minutos:</label>
+        <input type="number" id="minutos" name="minutos" required>
+
+        <label for="segundos">Segundos:</label>
+        <input type="number" id="segundos" name="segundos" required>
+
+        <button type="submit">Atualizar Campanha</button>
+    </form>
+
+    <!-- Script para atualizar a campanha no Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
+            authDomain: "arthur-schultz.firebaseapp.com",
+            projectId: "arthur-schultz",
+            storageBucket: "arthur-schultz.appspot.com",
+            messagingSenderId: "273634896292",
+            appId: "1:273634896292:web:0654cd33669194ded4b931",
+            measurementId: "G-C5G4446HG9",
+        };
+
+        // Inicializa o Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Função para atualizar a campanha
+        document.getElementById("updateCampanhaForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const rua = document.getElementById("rua").value;
+            const dias = document.getElementById("dias").value;
+            const horas = document.getElementById("horas").value;
+            const minutos = document.getElementById("minutos").value;
+            const segundos = document.getElementById("segundos").value;
+
+            const campanhaRef = ref(database, 'campanha');
+
+            set(campanhaRef, {
+                rua: rua,
+                dias: dias,
+                horas: horas,
+                minutos: minutos,
+                segundos: segundos
+            })
+                .then(() => {
+                    alert('Campanha atualizada com sucesso!');
+                    // Opcional: Limpe o formulário após o envio
+                    document.getElementById("updateCampanhaForm").reset();
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar campanha:', error);
+                    alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,7 +1,12 @@
-
-// Importação dos módulos Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, get, update, runTransaction } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  set,
+  runTransaction,
+  get,
+  onValue,
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -11,21 +16,22 @@ const firebaseConfig = {
   storageBucket: "arthur-schultz.appspot.com",
   messagingSenderId: "273634896292",
   appId: "1:273634896292:web:0654cd33669194ded4b931",
-  measurementId: "G-C5G4446HG9"
+  measurementId: "G-C5G4446HG9",
 };
 
 // Inicializando o Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const db = getDatabase(app);
 
+// Função para atualizar os contadores
 async function updateCounts() {
-  const countsRef = ref(database, 'counts');
+  const countsRef = ref(db, "counts");
   const snapshot = await get(countsRef);
   const data = snapshot.val();
-  document.getElementById('political-count').innerText = data.political || 0;
-  document.getElementById('members-count').innerText = data.members || 0;
-  document.getElementById('donations-count').innerText = data.donations || 0;
-  document.getElementById('voters-count').innerText = data.voters || 0;
+  document.getElementById("political-count").innerText = data.political || 0;
+  document.getElementById("members-count").innerText = data.members || 0;
+  document.getElementById("donations-count").innerText = data.donations || 0;
+  document.getElementById("voters-count").innerText = data.voters || 0;
 }
 
 // Atualizar contadores ao carregar a página
@@ -33,37 +39,40 @@ updateCounts();
 
 // Função para incrementar o contador
 function incrementCounter(counter) {
-  const counterRef = ref(database, `counts/${counter}`);
+  const counterRef = ref(db, `counts/${counter}`);
   runTransaction(counterRef, (currentValue) => {
-      return (currentValue || 0) + 1;
+    return (currentValue || 0) + 1;
   }).then(updateCounts);
 }
 
 // Manipuladores de eventos para os botões
-document.getElementById('become-member').addEventListener('click', () => {
-  incrementCounter('members');
+document.getElementById("become-member").addEventListener("click", () => {
+  incrementCounter("members");
 });
 
-document.getElementById('make-donation').addEventListener('click', () => {
-  incrementCounter('donations');
+document.getElementById("make-donation").addEventListener("click", () => {
+  incrementCounter("donations");
 });
 
-document.getElementById('mark-political-speech').addEventListener('click', () => {
-  incrementCounter('political');
+document
+  .getElementById("mark-political-speech")
+  .addEventListener("click", () => {
+    incrementCounter("political");
+  });
+
+document.getElementById("become-active-voter").addEventListener("click", () => {
+  incrementCounter("voters");
 });
 
-document.getElementById('become-active-voter').addEventListener('click', () => {
-  incrementCounter('voters');
-});
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  const restritoButton = document.getElementById('restrito');
-  restritoButton.addEventListener("click", function() {
-      window.location.href = "./area-admin/areaAdmin.html";
+// Redirecionar para área restrita
+document.addEventListener("DOMContentLoaded", function () {
+  const restritoButton = document.getElementById("restrito");
+  restritoButton.addEventListener("click", function () {
+    window.open("./area-admin/areaAdmin.html", "_blank");
   });
 });
 
+// Controle do menu e slider
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
@@ -89,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dotsContainer.appendChild(dot);
     dots.push(dot);
   });
+
   document.getElementById("mobile-menu").addEventListener("click", function () {
     var menuToggle = document.querySelector(".menu-toggle");
     menuToggle.classList.toggle("active");
@@ -97,12 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Bloqueia ou desbloqueia a rolagem do corpo da página
     if (menuToggle.classList.contains("active")) {
-        document.body.classList.add("no-scroll");
-        
+      document.body.classList.add("no-scroll");
     } else {
-        document.body.classList.remove("no-scroll");
+      document.body.classList.remove("no-scroll");
     }
-});
+  });
+
   function updateDots() {
     dots.forEach((dot, index) => {
       dot.classList.toggle("active", index === currentSlide);
@@ -111,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
-      slide.style.display = (i === index) ? "block" : "none";
+      slide.style.display = i === index ? "block" : "none";
     });
     updateDots();
   }
@@ -142,52 +152,78 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentSlide);
   }, 5000);
 
-  function getRemainingTime() {
-    const savedTime = localStorage.getItem("remainingTime");
-    return savedTime ? JSON.parse(savedTime) : { days: 27, hours: 10, minutes: 12, seconds: 20 };
-  }
+  const campanhaRef = ref(db, "campanha");
 
-  let { days, hours, minutes, seconds } = getRemainingTime();
+// Monitorando alterações no nó 'campanha'
+onValue(campanhaRef, (snapshot) => {
+  const campanha = snapshot.val();
+  if (campanha) {
+    document.getElementById("campanha-local").innerText = campanha.rua;
 
-  function updateCountdown() {
-    if (seconds > 0) {
-      seconds--;
-    } else {
-      seconds = 59;
-      if (minutes > 0) {
-        minutes--;
-      } else {
-        minutes = 59;
-        if (hours > 0) {
-          hours--;
+    // Função para iniciar a contagem regressiva
+    function startCountdown() {
+      // Convertendo os valores para números inteiros
+      let dias = parseInt(campanha.dias);
+      let horas = parseInt(campanha.horas);
+      let minutos = parseInt(campanha.minutos);
+      let segundos = parseInt(campanha.segundos);
+
+      // Calculando o total de segundos
+      let totalSeconds = dias * 24 * 60 * 60 +
+        horas * 60 * 60 +
+        minutos * 60 +
+        segundos;
+
+      let countdownInterval = setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+
+          // Calcular os novos valores de dias, horas, minutos e segundos
+          dias = Math.floor(totalSeconds / (24 * 60 * 60));
+          horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+          minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
+          segundos = totalSeconds % 60;
+
+          // Atualizar os elementos HTML com os novos valores
+          document.getElementById("dias").innerText = dias < 10 ? `0${dias}` : dias;
+          document.getElementById("horas").innerText = horas < 10 ? `0${horas}` : horas;
+          document.getElementById("minutos").innerText = minutos < 10 ? `0${minutos}` : minutos;
+          document.getElementById("segundos").innerText = segundos < 10 ? `0${segundos}` : segundos;
+
+          // Atualizar os valores no Realtime Database a cada segundo
+          set(campanhaRef, {
+            rua: campanha.rua,
+            dias: dias.toString(),
+            horas: horas.toString(),
+            minutos: minutos.toString(),
+            segundos: segundos.toString()
+          });
         } else {
-          hours = 23;
-          if (days > 0) {
-            days--;
-          } else {
-            days = 0;
-          }
+          clearInterval(countdownInterval);
+          // Lógica para quando a contagem chegar a zero
+          alert('Contagem regressiva encerrada!');
         }
-      }
+      }, 1000);
     }
 
-    daysValue.textContent = days.toString().padStart(2, "0");
-    hoursValue.textContent = hours.toString().padStart(2, "0");
-    minutesValue.textContent = minutes.toString().padStart(2, "0");
-    secondsValue.textContent = seconds.toString().padStart(2, "0");
-
-    localStorage.setItem("remainingTime", JSON.stringify({ days, hours, minutes, seconds }));
+    // Iniciar a contagem regressiva
+    startCountdown();
+  } else {
+    document.getElementById("campanha-local").innerText =
+      "Nenhuma campanha configurada";
   }
+});
 
 
 
-  setInterval(updateCountdown, 1000);
+
+
 
   const sr = ScrollReveal({
     origin: "bottom",
     distance: "50px",
     duration: 2000,
-    reset: true
+    reset: true,
   });
 
   sr.reveal(".sr-element");
