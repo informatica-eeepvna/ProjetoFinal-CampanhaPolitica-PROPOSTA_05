@@ -11,6 +11,7 @@
 }
 html {
   scroll-behavior: smooth;
+
 }
 .sr-element {
   visibility: hidden;
@@ -21,6 +22,7 @@ html {
 
 body {
   background-color: #f1f1f1;
+  overflow-x: hidden;
 }
 header {
   background-color: var(--fundo-color);
@@ -118,13 +120,14 @@ header {
 }
 
 .nav-links button:hover {
-  background-color: #ff0000; /* Verde mais escuro */
+  background-color: #1e7028; /* Verde mais escuro */
+  transition: all 0.3s ease-in-out;
 }
 
 .slider-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: auto;
+  height: auto;
   margin: auto;
   display: flex;
   overflow: hidden; /* Esconde as imagens que não estão visíveis */
@@ -132,7 +135,7 @@ header {
 
 .slide {
   flex: 0 0 100vw; /* Garante que cada slide ocupe a largura total da viewport */
-  height: 100vh;
+  height: auto;
 }
 
 .slide img {
@@ -142,16 +145,17 @@ header {
   object-position: center;
 }
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 55%;
   width: auto;
   padding: 16px;
   margin-top: -22px;
   color: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
   transition: 0.6s ease;
   user-select: none;
   z-index: 1000; /* Garante que os botões fiquem acima das imagens */
@@ -161,7 +165,8 @@ header {
   right: 0;
 }
 
-.prev:hover, .next:hover {
+.prev:hover,
+.next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -238,20 +243,22 @@ p {
 .section-four .buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
   flex-wrap: wrap; /* Adicionado para permitir quebra de linha */
+  gap: 10px;
 }
 
 .section-four .buttons button {
-  background-color: #04ab17;
-  color: white;
-  padding: 10px 20px;
+  background-color: #ffc200;
+  color: rgb(0, 0, 0);
+  padding: 10px 25px;
   border: none;
   cursor: pointer;
   border-radius: 10px;
   transition: background-color 0.3s ease;
   flex: 1 1 calc(50% - 40px); /* Ajusta a largura dos botões */
   max-width: 200px; /* Limite de largura máxima */
+  font-size: 17px;
+  
 }
 .section-four .conquistas {
   display: flex;
@@ -279,12 +286,11 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   margin-top: 40px;
 }
 
 .section-five-one {
-  flex: 1 1 40%;
+  flex: 1 1 50%;
   display: flex;
   justify-content: center;
 }
@@ -303,6 +309,7 @@ p {
 .section-five-two p {
   margin: 0;
   line-height: 1.6;
+  font-size: 24px;
 }
 
 .section-two {
@@ -484,13 +491,6 @@ p {
   color: white;
 }
 
-.sections-five {
-  display: grid;
-  width: 100%;
-  height: 90%;
-  grid-template-columns: 1fr 1fr;
-}
-
 .section-five-one,
 .section-five-two {
   align-items: center;
@@ -580,49 +580,49 @@ p {
   color: #ffffff;
 }
 
-.section-six {
-  color: #fff;
-  width: 90%;
-  margin: 0 auto;
-}
+  .section-six {
+    color: #fff;
+    width: 90%;
+    margin: 0 auto;
+  }
 
-.section-six div h1 {
-  margin-bottom: 20px;
-  color: #000;
-  width: 100%;
-}
+  .section-six div h1 {
+    margin-bottom: 20px;
+    color: #000;
+    width: 100%;
+  }
 
-.section-six .container-cards {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
+  .section-six .container-cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 
-.card {
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 22%;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+  .card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    width: 22%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 15px;
-}
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+  }
 
-.card p {
-  margin: 0;
-}
+  .card p {
+    margin: 0;
+  }
 
 .section-eight {
   height: 50vh;
@@ -630,7 +630,7 @@ p {
 
 .container-comments {
   background-color: #0464ab;
-  height: 100%;
+  height: 80%;
   gap: 25px;
   display: flex;
   align-items: center;
@@ -643,10 +643,10 @@ p {
 /* Estilos para o contêiner de comentários e comentários */
 .comment {
   background-color: rgb(255, 255, 255);
-  height: 90%; /* Altura fixa */
-  width: auto; /* Largura fixa */
+  height: 80%; /* Define a altura para 100% do contêiner pai */
+  min-width: 500px; /* Define uma largura mínima para os comentários */
+  max-width: 600px; /* Define uma largura máxima para os comentários */
   padding: 10px 20px;
-  gap: 25px;
   display: inline-block; /* Alinha os comentários em linha */
   vertical-align: top; /* Alinha os comentários ao topo */
   border-radius: 10px;
@@ -655,6 +655,7 @@ p {
   box-sizing: border-box; /* Inclui padding e border na largura e altura total */
   margin-right: 15px;
 }
+
 .comment p {
   color: black;
   text-align: justify;
@@ -688,13 +689,12 @@ p {
   background-color: #ffc200;
   padding: 5px;
   border-radius: 1rem;
+  gap: 10px;
 }
-.profile img {
-  width: 40px; /* Reduz o tamanho da imagem */
-  height: 40px; /* Reduz o tamanho da imagem */
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
+
+.profile i {
+  font-size: 40px; /* Define o tamanho do ícone */
+  color: #333;
 }
 
 .profile h3 {
@@ -705,6 +705,7 @@ p {
   overflow: hidden;
   text-overflow: ellipsis; /* Adiciona reticências (...) se o nome for muito longo */
 }
+
 
 .contact {
   background-color: #f2f2f2;
@@ -905,15 +906,15 @@ p {
     padding: 20px 0;
     z-index: 9999; /* Valor alto para garantir que fique por cima */
   }
-  .slider-container{
+  .slider-container {
     height: auto;
   }
   .slide {
     height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
-    
   }
 
-  .prev, .next {
+  .prev,
+  .next {
     font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
     padding: 12px; /* Ajusta o padding dos botões de navegação */
     top: 40%;
@@ -1007,10 +1008,7 @@ p {
   .carreira-content ul {
     padding: 0;
   }
-  .container-cards {
-    flex-direction: column;
-    align-items: center;
-  }
+  
 
   .card {
     width: 90%;
@@ -1076,13 +1074,18 @@ p {
     font-size: 20px;
     font-weight: 100;
   }
-
+  .sections-five {
+    flex-direction: column;
+  }
+  .section-five-two p {
+    font-size: 20px;
+  }
   .days,
   .hours,
   .minutes,
   .seconds {
-    width: 70px; /* Reduz o tamanho dos relógios */
-    height: 70px;
+    width: 80px; /* Reduz o tamanho dos relógios */
+    height: 80px;
   }
 
   .value {
@@ -1107,7 +1110,9 @@ p {
   .two-text ul li {
     width: 100%; /* Ajusta a largura dos itens da lista para 100% */
   }
-
+  .container-cards{
+    gap: 25px;
+  }
   .container-comments {
     display: block;
     overflow-x: auto; /* Garante rolagem horizontal */
@@ -1215,14 +1220,15 @@ p {
     align-items: flex-end;
     gap: 5px;
   }
-  .slider-container{
+  .slider-container {
     height: auto;
   }
   .slide {
     height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
   }
 
-  .prev, .next {
+  .prev,
+  .next {
     font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
     padding: 12px; /* Ajusta o padding dos botões de navegação */
     top: 50%;
@@ -1310,7 +1316,9 @@ p {
   .clock {
     gap: 20px; /* Reduz o espaçamento entre os elementos */
   }
-
+  .sections-five {
+    flex-direction: column;
+  }
   .days,
   .hours,
   .minutes,
@@ -1326,7 +1334,12 @@ p {
   .label {
     font-size: 14px; /* Reduz o tamanho da fonte */
   }
-
+  .container-cards{
+    gap: 20px;
+  }
+  .card {
+    width: 40%;
+  }
   .container-comments {
     display: block;
     overflow-x: auto; /* Garante rolagem horizontal */
@@ -1378,14 +1391,15 @@ p {
     padding: 9px 14px;
   }
 
-  .slider-container{
+  .slider-container {
     height: auto;
   }
   .slide {
     height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
   }
 
-  .prev, .next {
+  .prev,
+  .next {
     font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
     padding: 12px; /* Ajusta o padding dos botões de navegação */
     top: 50%;
@@ -1452,8 +1466,8 @@ p {
   .hours,
   .minutes,
   .seconds {
-    width: 140px; /* Reduz o tamanho dos relógios */
-    height: 140px;
+    width: 110px; /* Reduz o tamanho dos relógios */
+    height: 110px;
   }
 
   .value {
@@ -1463,11 +1477,15 @@ p {
   .label {
     font-size: 18px; /* Reduz o tamanho da fonte */
   }
+  .container-cards{
+    gap: 20px;
+  }
+  .card {
+    width: 30%;
+  }
 
-  .container-comments {
-    display: block;
-    overflow-x: auto; /* Garante rolagem horizontal */
-    white-space: nowrap; /* Evita quebra de linha */
+  .section-six div h1 {
+    text-align: center;
   }
 
   .comment {
@@ -1508,20 +1526,19 @@ p {
     padding: 9px 14px;
   }
 
-  /* .slider-container {
-    height: 100vh;
+  .slider-container {
+    height: auto;
+  }
+  .slide {
+    height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
   }
 
-  .slide-content {
-    top: 60%;
+  .prev,
+  .next {
+    font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
+    padding: 12px; /* Ajusta o padding dos botões de navegação */
+    top: 50%;
   }
-
-  .slider-container .slide img {
-    object-position: bottom;
-  }
-  .dots-container {
-    bottom: -35px;
-  } */
   .informations-container {
     padding: 20px;
   }
@@ -1584,8 +1601,8 @@ p {
   .hours,
   .minutes,
   .seconds {
-    width: 140px; /* Reduz o tamanho dos relógios */
-    height: 140px;
+    width: 110px; /* Reduz o tamanho dos relógios */
+    height: 110px;
   }
 
   .value {
@@ -1594,6 +1611,9 @@ p {
 
   .label {
     font-size: 14px; /* Reduz o tamanho da fonte */
+  }
+  .card{
+    width: 30%;
   }
   .container-comments {
     display: block;
