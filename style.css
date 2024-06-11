@@ -124,6 +124,7 @@ header {
 .slider-container {
   position: relative;
   width: 100%;
+  max-width: 1240px;
   margin: auto;
   overflow: hidden;
 }
@@ -137,8 +138,7 @@ header {
   height: auto;
 }
 
-.prev,
-.next {
+.prev, .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -158,31 +158,12 @@ header {
   border-radius: 3px 0 0 3px;
 }
 
-.prev:hover,
-.next:hover {
+.prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.dots-container {
-  text-align: center;
-  padding: 20px;
-}
 
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
 
-.dot.active,
-.dot:hover {
-  background-color: #717171;
-}
 
 .informations-container {
   display: flex;
@@ -912,7 +893,13 @@ p {
   .menu-toggle.active nav {
     display: block; /* Exibe a lista de navegação quando o menu está aberto */
   }
-
+  .slider-container{
+    height: 85vh;
+  }
+  .slider-container .slide{
+    object-fit: cover;
+    object-position: center
+  }
   .nav-links.active {
     display: flex;
     flex-direction: column;
