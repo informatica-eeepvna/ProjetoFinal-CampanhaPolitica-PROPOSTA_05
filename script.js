@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentSlide);
 });
 
+// menu hamburguer
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");

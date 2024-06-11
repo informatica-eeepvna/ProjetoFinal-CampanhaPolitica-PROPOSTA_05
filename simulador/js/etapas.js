@@ -88,7 +88,7 @@ let etapas = [
                 nome: 'Arthur Schultz',
                 partido: 'PROFISSIONAIS DE TECNOLOGIA DO CEARA- PPTC',
                 fotos: [
-                    {url:'Arthur Schultz.jpg', legenda: 'Deputado Federal  '}
+                    {url:'Arthur Schultz.jpeg', legenda: 'Deputado Federal  '}
                 ]
             },
             {

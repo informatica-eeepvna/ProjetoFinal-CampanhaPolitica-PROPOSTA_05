@@ -123,22 +123,23 @@ header {
 
 .slider-container {
   position: relative;
-  width: 100%;
-  max-width: 1240px;
+  width: 100vw;
+  height: 100vh;
   margin: auto;
-  overflow: hidden;
-  white-space: nowrap; /* Para manter as imagens em uma linha */
+  display: flex;
+  overflow: hidden; /* Esconde as imagens que não estão visíveis */
 }
 
 .slide {
-  display: inline-block; /* Exibir em linha */
-  vertical-align: top; /* Alinhar ao topo */
-  white-space: normal; /* Redefinir o white-space */
+  flex: 0 0 100vw; /* Garante que cada slide ocupe a largura total da viewport */
+  height: 100vh;
 }
 
 .slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .prev, .next {
@@ -152,13 +153,12 @@ header {
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
   user-select: none;
+  z-index: 1000; /* Garante que os botões fiquem acima das imagens */
 }
 
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
 }
 
 .prev:hover, .next:hover {
@@ -905,12 +905,17 @@ p {
     padding: 20px 0;
     z-index: 9999; /* Valor alto para garantir que fique por cima */
   }
-  .slider-container {
-    height: 85vh;
+  .slider-container{
+    height: auto;
   }
-  .slider-container .slide {
-    object-fit: cover;
-    object-position: center;
+  .slide {
+    height: 60vh; /* Ajusta a altura dos slides em dispositivos móveis */
+  }
+
+  .prev, .next {
+    font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
+    padding: 12px; /* Ajusta o padding dos botões de navegação */
+    top: 40%;
   }
   .section-one,
   .section-two,
