@@ -127,10 +127,13 @@ header {
   max-width: 1240px;
   margin: auto;
   overflow: hidden;
+  white-space: nowrap; /* Para manter as imagens em uma linha */
 }
 
 .slide {
-  display: none;
+  display: inline-block; /* Exibir em linha */
+  vertical-align: top; /* Alinhar ao topo */
+  white-space: normal; /* Redefinir o white-space */
 }
 
 .slide img {
@@ -161,9 +164,6 @@ header {
 .prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
-
-
-
 
 .informations-container {
   display: flex;
@@ -893,13 +893,6 @@ p {
   .menu-toggle.active nav {
     display: block; /* Exibe a lista de navegação quando o menu está aberto */
   }
-  .slider-container{
-    height: 85vh;
-  }
-  .slider-container .slide{
-    object-fit: cover;
-    object-position: center
-  }
   .nav-links.active {
     display: flex;
     flex-direction: column;
@@ -911,6 +904,13 @@ p {
     height: auto;
     padding: 20px 0;
     z-index: 9999; /* Valor alto para garantir que fique por cima */
+  }
+  .slider-container {
+    height: 85vh;
+  }
+  .slider-container .slide {
+    object-fit: cover;
+    object-position: center;
   }
   .section-one,
   .section-two,

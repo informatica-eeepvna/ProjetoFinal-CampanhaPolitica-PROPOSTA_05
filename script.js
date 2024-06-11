@@ -73,72 +73,87 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const slidesDesktop = document.querySelectorAll(".slide.desktop");
-  const slidesMobile = document.querySelectorAll(".slide.mobile");
+    const slidesDesktop = document.querySelectorAll(".slide.desktop");
+    const slidesMobile = document.querySelectorAll(".slide.mobile");
 
-  function replaceImages() {
-      const windowWidth = window.innerWidth;
-      if (windowWidth < 1240) {
-          slidesDesktop.forEach((slide) => {
-              slide.style.display = "none";
-          });
-          slidesMobile.forEach((slide) => {
-              slide.style.display = "block";
-          });
-      } else {
-          slidesDesktop.forEach((slide) => {
-              slide.style.display = "block";
-          });
-          slidesMobile.forEach((slide) => {
-              slide.style.display = "none";
-          });
-      }
-  }
+    function replaceImages() {
+        const windowWidth = window.innerWidth;
+        if (windowWidth < 1240) {
+            slidesDesktop.forEach((slide) => {
+                slide.style.display = "none";
+            });
+            slidesMobile.forEach((slide) => {
+                slide.style.display = "block";
+            });
+        } else {
+            slidesDesktop.forEach((slide) => {
+                slide.style.display = "block";
+            });
+            slidesMobile.forEach((slide) => {
+                slide.style.display = "none";
+            });
+        }
+    }
 
-  // Inicializa os slides corretamente
-  function initializeSlides() {
-      const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
-      slides[0].style.display = "block";
-  }
+    // Inicializa os slides corretamente
+    function initializeSlides() {
+        const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
+        slides[0].style.display = "block";
+    }
 
-  // Função para mostrar o slide atual
-  function showSlide(index) {
-      const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
-      slides.forEach((slide, i) => {
-          slide.style.display = i === index ? "block" : "none";
-      });
-  }
+    // Função para mostrar o slide atual
+    function showSlide(index) {
+        const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? "block" : "none";
+        });
+    }
 
-  // Inicializa a exibição das imagens ao carregar a página
-  replaceImages();
-  initializeSlides();
+    // Inicializa a exibição das imagens ao carregar a página
+    replaceImages();
+    initializeSlides();
 
-  // Atualiza a exibição das imagens quando a janela é redimensionada
-  window.addEventListener("resize", () => {
-      replaceImages();
-      initializeSlides();
-  });
+    // Atualiza a exibição das imagens quando a janela é redimensionada
+    window.addEventListener("resize", () => {
+        replaceImages();
+        initializeSlides();
+    });
 
-  // Controles do slider
-  let currentSlide = 0;
-  const prevButton = document.querySelector(".prev");
-  const nextButton = document.querySelector(".next");
+    // Controles do slider
+    let currentSlide = 0;
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
 
-  prevButton.addEventListener("click", () => {
-      currentSlide = (currentSlide > 0) ? currentSlide - 1 : slidesDesktop.length - 1;
-      showSlide(currentSlide);
-  });
+    prevButton.addEventListener("click", () => {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slidesDesktop.length - 1;
+        showSlide(currentSlide);
+    });
 
-  nextButton.addEventListener("click", () => {
-      currentSlide = (currentSlide < slidesDesktop.length - 1) ? currentSlide + 1 : 0;
-      showSlide(currentSlide);
-  });
+    nextButton.addEventListener("click", () => {
+        currentSlide = (currentSlide < slidesDesktop.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
+    });
 
-  // Inicializa o primeiro slide
-  showSlide(currentSlide);
+    // Inicializa o primeiro slide
+    showSlide(currentSlide);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
+  menuToggle.addEventListener("click", function () {
+      menuToggle.classList.toggle("active");
+      navLinks.classList.toggle("active");
+
+      // Bloqueia ou desbloqueia a rolagem do corpo da página
+      if (menuToggle.classList.contains("active")) {
+          document.body.classList.add("no-scroll");
+      } else {
+          document.body.classList.remove("no-scroll");
+      }
+  });
+});
 // document.addEventListener("DOMContentLoaded", function () {
 //   const slides = document.querySelectorAll(".slide");
 
