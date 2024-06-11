@@ -909,7 +909,8 @@ p {
     height: auto;
   }
   .slide {
-    height: 60vh; /* Ajusta a altura dos slides em dispositivos móveis */
+    height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
+    
   }
 
   .prev, .next {
@@ -1214,18 +1215,17 @@ p {
     align-items: flex-end;
     gap: 5px;
   }
-  .slider-container {
-    max-width: 100%;
+  .slider-container{
+    height: auto;
+  }
+  .slide {
+    height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
   }
 
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+  .prev, .next {
+    font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
+    padding: 12px; /* Ajusta o padding dos botões de navegação */
+    top: 50%;
   }
   .informations-container {
     padding: 20px;
@@ -1378,20 +1378,18 @@ p {
     padding: 9px 14px;
   }
 
-  /* .slider-container {
-    height: 100vh;
+  .slider-container{
+    height: auto;
+  }
+  .slide {
+    height: auto; /* Ajusta a altura dos slides em dispositivos móveis */
   }
 
-  .slide-content {
-    top: 60%;
+  .prev, .next {
+    font-size: 16px; /* Ajusta o tamanho da fonte dos botões de navegação */
+    padding: 12px; /* Ajusta o padding dos botões de navegação */
+    top: 50%;
   }
-
-  .slider-container .slide img {
-    object-position: bottom;
-  }
-  .dots-container {
-    bottom: -35px;
-  } */
   .informations-container {
     padding: 20px;
   }
