@@ -8,6 +8,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <link rel="shortcut icon" href="../../images/LogoTipo.png" type="image/x-icon">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
@@ -18,8 +20,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #1a4286;
-            color: white;
+            color: rgb(255, 255, 255);
             height: 100vh;
         }
 
@@ -28,10 +29,13 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
+            padding: 40px;
             margin: 20px;
             width: 90%;
             max-width: 600px;
+            background: #0464ab;
+            box-sizing: border-box;
+            /* Adicionado */
         }
 
         .profile-container h2,
@@ -54,6 +58,8 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
+            box-sizing: border-box;
+            /* Adicionado */
         }
 
         .profile-options {
@@ -145,7 +151,6 @@
             text-decoration: underline;
         }
 
-
         .apoiadores-container {
             max-width: 600px;
             margin: 20px auto;
@@ -195,6 +200,40 @@
 
         .btn-editar-apoiador:hover,
         .btn-excluir-apoiador:hover {
+            background-color: #0056b3;
+        }
+        /* Modal de Edição */
+        #modalEditarApoiador .area-login {
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: left;
+            background: #04458a;
+        }
+
+        #modalEditarApoiador .input-group label {
+            color: #ffffff;
+        }
+
+        #modalEditarApoiador .input-group input,
+        #modalEditarApoiador .input-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #modalEditarApoiador button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        #modalEditarApoiador button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -292,7 +331,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
         import { getDatabase, ref, push, get, update, remove, child } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-    
+
         // Configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
@@ -303,29 +342,29 @@
             appId: "1:273634896292:web:0654cd33669194ded4b931",
             measurementId: "G-C5G4446HG9"
         };
-    
+
         // Inicializa o Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
         const auth = getAuth();
-    
+
         // Função para verificar as credenciais do usuário
         document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Evita o envio do formulário
-    
+
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
-    
+
             // Autentica o usuário com o email e senha fornecidos
             signInWithEmailAndPassword(auth, email, senha)
                 .then((userCredential) => {
                     // Login bem sucedido
                     const user = userCredential.user;
                     console.log("Usuário logado:", user);
-    
+
                     // Oculta o modal de login
                     document.getElementById("loginModal").style.display = "none";
-    
+
                     // Exibe o perfil do usuário
                     exibirPerfil(user);
                     // Exibe os apoiadores cadastrados
@@ -335,12 +374,12 @@
                     // Caso ocorra um erro durante o login
                     const errorMessage = error.message;
                     console.error("Erro ao fazer login:", errorMessage);
-    
+
                     // Exibe uma mensagem de erro para o usuário
                     document.querySelector(".area-login p").textContent = errorMessage;
                 });
         });
-    
+
         // Função para exibir o perfil do usuário
         function exibirPerfil(user) {
             document.getElementById("useremail").textContent = user.email;
@@ -361,7 +400,7 @@
                 console.error(error);
             });
         }
-    
+
         // Função para verificar autenticação ao carregar a página
         function verificarAutenticacao() {
             const user = auth.currentUser;
@@ -373,14 +412,14 @@
             } else {
                 const modal = document.getElementById('loginModal');
                 modal.style.display = "flex";
-    
+
                 const closeButton = document.querySelector('.close');
                 closeButton.onclick = function () {
                     modal.style.display = "none";
                 };
             }
         }
-    
+
         // Evento disparado ao carregar a página
         document.addEventListener("DOMContentLoaded", function () {
             onAuthStateChanged(auth, (user) => {
@@ -394,10 +433,10 @@
                 }
             });
         });
-    
+
         // Evento para cadastro de apoiador
         document.getElementById("verificarAutenticacao").addEventListener("click", cadastrarApoiador);
-    
+
         // Função para limpar os campos do formulário de cadastro
         function limparCamposCadastro() {
             document.getElementById('nome').value = '';
@@ -406,7 +445,7 @@
             document.getElementById('cidade').value = '';
             document.getElementById('tipo').value = '';
         }
-    
+
         // Função para cadastrar um novo apoiador
         function cadastrarApoiador() {
             const nome = document.getElementById('nome').value;
@@ -414,9 +453,9 @@
             const dataNascimento = document.getElementById('data-nascimento').value;
             const cidade = document.getElementById('cidade').value;
             const tipo = document.getElementById('tipo').value;
-    
+
             console.log("Dados do apoiador:", nome, cpf, dataNascimento, cidade, tipo);
-    
+
             if (nome && cpf && dataNascimento && cidade && tipo) {
                 const apoiadoresRef = ref(db, 'apoiadores');
                 push(apoiadoresRef, {
@@ -436,7 +475,7 @@
                 alert('Por favor, preencha todos os campos.');
             }
         }
-    
+
         // Função para exibir apoiadores cadastrados
         function exibirApoiadores() {
             const apoiadoresRef = ref(db, 'apoiadores');
@@ -454,33 +493,33 @@
                         const dataNascimento = document.createElement("div");
                         const cidade = document.createElement("div");
                         const tipo = document.createElement("div");
-    
+
                         nome.textContent = `Nome: ${apoiador.nome}`;
                         cpf.textContent = `CPF: ${apoiador.cpf}`;
                         dataNascimento.textContent = `Data de Nascimento: ${apoiador.dataNascimento}`;
                         cidade.textContent = `Cidade: ${apoiador.cidade}`;
                         tipo.textContent = `Tipo de Apoiador: ${apoiador.tipo}`;
-    
+
                         apoiadorInfo.appendChild(nome);
                         apoiadorInfo.appendChild(cpf);
                         apoiadorInfo.appendChild(dataNascimento);
                         apoiadorInfo.appendChild(cidade);
                         apoiadorInfo.appendChild(tipo);
-    
+
                         const editarButton = document.createElement("button");
                         editarButton.textContent = "Editar";
                         editarButton.classList.add("btn-editar-apoiador");
                         editarButton.onclick = function () {
                             abrirModalEdicao(apoiador, key);
                         };
-    
+
                         const excluirButton = document.createElement("button");
                         excluirButton.textContent = "Excluir";
                         excluirButton.classList.add("btn-excluir-apoiador");
                         excluirButton.onclick = function () {
                             excluirApoiador(key);
                         };
-    
+
                         listItem.appendChild(apoiadorInfo);
                         listItem.appendChild(editarButton);
                         listItem.appendChild(excluirButton);
@@ -494,7 +533,7 @@
                 console.error(error);
             });
         }
-    
+
         // Função para abrir o modal de edição
         function abrirModalEdicao(apoiador, key) {
             document.getElementById('edit-key').value = key;
@@ -505,10 +544,10 @@
             document.getElementById('edit-tipo').value = apoiador.tipo;
             document.getElementById('modalEditarApoiador').style.display = "flex";
         }
-    
+
         // Evento para salvar a edição do apoiador
         document.getElementById('btnSalvarEdicaoApoiador').addEventListener('click', salvarEdicaoApoiador);
-    
+
         // Função para salvar a edição do apoiador
         function salvarEdicaoApoiador() {
             const key = document.getElementById('edit-key').value;
@@ -517,7 +556,7 @@
             const dataNascimento = document.getElementById('edit-data-nascimento').value;
             const cidade = document.getElementById('edit-cidade').value;
             const tipo = document.getElementById('edit-tipo').value;
-    
+
             const apoiadorRef = ref(db, `apoiadores/${key}`);
             update(apoiadorRef, {
                 nome: nome,
@@ -533,7 +572,7 @@
                 console.error('Erro ao atualizar apoiador:', error);
             });
         }
-    
+
         // Função para excluir um apoiador
         function excluirApoiador(key) {
             const apoiadorRef = ref(db, `apoiadores/${key}`);
@@ -547,7 +586,7 @@
         // Evento para logout
         document.getElementById("logout-link").addEventListener("click", function (event) {
             event.preventDefault(); // Evita o comportamento padrão do link
-    
+
             signOut(auth).then(() => {
                 // Limpar campos de login
                 document.getElementById("email").value = "";
@@ -559,7 +598,7 @@
             });
         });
     </script>
-    
+
 
 
 

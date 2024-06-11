@@ -68,7 +68,7 @@ document.getElementById("become-active-voter").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", function () {
   const restritoButton = document.getElementById("restrito");
   restritoButton.addEventListener("click", function () {
-    window.open("./area-admin/areaAdmin.html", "_blank");
+    window.open("./views/area-admin/areaAdmin.html", "_blank");
   });
 });
 
