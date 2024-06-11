@@ -285,7 +285,7 @@
                     <input type="password" id="senha" name="senha" placeholder="Senha" autofocus>
                     <input type="submit" value="Entrar" style="color: white;">
                 </form>
-                <p>Ainda não tem uma conta?<a href="../cadastro/Registro.html">Criar conta</a></p>
+                <p>Ainda não tem uma conta?<a href="../area-admin/cadastro/Registro.html">Criar conta</a></p>
             </div>
         </section>
     </div>
@@ -420,19 +420,7 @@
             }
         }
 
-        // Evento disparado ao carregar a página
-        document.addEventListener("DOMContentLoaded", function () {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    exibirPerfil(user);
-                    verificarAutenticacao();
-                    exibirApoiadores();
-                } else {
-                    const modal = document.getElementById('loginModal');
-                    modal.style.display = "flex";
-                }
-            });
-        });
+        
 
         // Evento para cadastro de apoiador
         document.getElementById("verificarAutenticacao").addEventListener("click", cadastrarApoiador);

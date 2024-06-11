@@ -157,7 +157,7 @@
                     <input type="password" id="senha" name="senha" placeholder="Senha" autofocus>
                     <input type="submit" value="Entrar" style="color: white;">
                 </form>
-                <p>Ainda não tem uma conta?<a href="../cadastro/Registro.html">Criar conta</a></p>
+                <p>Ainda não tem uma conta?<a href="./cadastro/Registro.html">Criar conta</a></p>
             </div>
         </section>
     </div>
@@ -174,9 +174,8 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-        import { getDatabase, ref, push, get, update, remove, child } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
     
-        // Configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
             authDomain: "arthur-schultz.firebaseapp.com",
@@ -213,17 +212,32 @@
             event.preventDefault(); // Evita o envio do formulário padrão
             const email = document.getElementById('email').value;
             const password = document.getElementById('senha').value;
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Login bem-sucedido, verifique a autenticação
-                    verificarAutenticacao();
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.error(errorMessage);
-                    // Aqui você pode exibir uma mensagem de erro para o usuário
-                });
+    
+            // Verificar se os dados do usuário estão no Realtime Database antes de fazer o login
+            const usersRef = ref(db, `users`);
+            get(child(usersRef, email.replace('.', ','))).then((snapshot) => {
+                if (snapshot.exists()) {
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            // Login bem-sucedido, verifique a autenticação
+                            verificarAutenticacao();
+                        })
+                        .catch((error) => {
+                            const errorMessage = error.message;
+                            console.error(errorMessage);
+                            // Aqui você pode exibir uma mensagem de erro para o usuário
+                            alert("Erro ao fazer login: " + errorMessage);
+                        });
+                } else {
+                    console.log("Usuário não encontrado no banco de dados");
+                    // Exibir mensagem informando que os dados de login são inválidos
+                    alert("Erro nas credenciais: Usuário não encontrado no banco de dados");
+                }
+            }).catch((error) => {
+                console.error("Erro ao acessar o banco de dados:", error);
+                // Exibir mensagem de erro para o usuário
+                alert("Erro ao acessar o banco de dados: " + error.message);
+            });
         });
     
         // Função para logout
@@ -235,13 +249,10 @@
             });
         }
     
-        // Evento disparado ao carregar a página
-        document.addEventListener("DOMContentLoaded", function () {
-            onAuthStateChanged(auth, (user) => {
-                verificarAutenticacao();
-            });
-        });
+        
     </script>
+    
+    
     
 </body>
 

@@ -73,69 +73,71 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const slidesDesktop = document.querySelectorAll(".slide.desktop");
-    const slidesMobile = document.querySelectorAll(".slide.mobile");
+  const slidesDesktop = document.querySelectorAll(".slide.desktop");
+  const slidesMobile = document.querySelectorAll(".slide.mobile");
 
-    function replaceImages() {
-        const windowWidth = window.innerWidth;
-        if (windowWidth < 1240) {
-            slidesDesktop.forEach((slide) => {
-                slide.style.display = "none";
-            });
-            slidesMobile.forEach((slide) => {
-                slide.style.display = "block";
-            });
-        } else {
-            slidesDesktop.forEach((slide) => {
-                slide.style.display = "block";
-            });
-            slidesMobile.forEach((slide) => {
-                slide.style.display = "none";
-            });
-        }
+  function replaceImages() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth < 1240) {
+      slidesDesktop.forEach((slide) => {
+        slide.style.display = "none";
+      });
+      slidesMobile.forEach((slide) => {
+        slide.style.display = "block";
+      });
+    } else {
+      slidesDesktop.forEach((slide) => {
+        slide.style.display = "block";
+      });
+      slidesMobile.forEach((slide) => {
+        slide.style.display = "none";
+      });
     }
+  }
 
-    // Inicializa os slides corretamente
-    function initializeSlides() {
-        const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
-        slides[0].style.display = "block";
-    }
+  // Inicializa os slides corretamente
+  function initializeSlides() {
+    const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
+    slides[0].style.display = "block";
+  }
 
-    // Função para mostrar o slide atual
-    function showSlide(index) {
-        const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
-        slides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
-        });
-    }
+  // Função para mostrar o slide atual
+  function showSlide(index) {
+    const slides = window.innerWidth < 1240 ? slidesMobile : slidesDesktop;
+    slides.forEach((slide, i) => {
+      slide.style.display = i === index ? "block" : "none";
+    });
+  }
 
-    // Inicializa a exibição das imagens ao carregar a página
+  // Inicializa a exibição das imagens ao carregar a página
+  replaceImages();
+  initializeSlides();
+
+  // Atualiza a exibição das imagens quando a janela é redimensionada
+  window.addEventListener("resize", () => {
     replaceImages();
     initializeSlides();
+  });
 
-    // Atualiza a exibição das imagens quando a janela é redimensionada
-    window.addEventListener("resize", () => {
-        replaceImages();
-        initializeSlides();
-    });
+  // Controles do slider
+  let currentSlide = 0;
+  const prevButton = document.querySelector(".prev");
+  const nextButton = document.querySelector(".next");
 
-    // Controles do slider
-    let currentSlide = 0;
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
-
-    prevButton.addEventListener("click", () => {
-        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slidesDesktop.length - 1;
-        showSlide(currentSlide);
-    });
-
-    nextButton.addEventListener("click", () => {
-        currentSlide = (currentSlide < slidesDesktop.length - 1) ? currentSlide + 1 : 0;
-        showSlide(currentSlide);
-    });
-
-    // Inicializa o primeiro slide
+  prevButton.addEventListener("click", () => {
+    currentSlide =
+      currentSlide > 0 ? currentSlide - 1 : slidesDesktop.length - 1;
     showSlide(currentSlide);
+  });
+
+  nextButton.addEventListener("click", () => {
+    currentSlide =
+      currentSlide < slidesDesktop.length - 1 ? currentSlide + 1 : 0;
+    showSlide(currentSlide);
+  });
+
+  // Inicializa o primeiro slide
+  showSlide(currentSlide);
 });
 
 // menu hamburguer
@@ -144,15 +146,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelector(".nav-links");
 
   menuToggle.addEventListener("click", function () {
-      menuToggle.classList.toggle("active");
-      navLinks.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+    navLinks.classList.toggle("active");
 
-      // Bloqueia ou desbloqueia a rolagem do corpo da página
-      if (menuToggle.classList.contains("active")) {
-          document.body.classList.add("no-scroll");
-      } else {
-          document.body.classList.remove("no-scroll");
-      }
+    // Bloqueia ou desbloqueia a rolagem do corpo da página
+    if (menuToggle.classList.contains("active")) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
   });
 });
 // document.addEventListener("DOMContentLoaded", function () {
@@ -257,85 +259,88 @@ document.addEventListener("DOMContentLoaded", function () {
 //     showSlide(currentSlide);
 //   }, 5000);
 
-  const campanhaRef = ref(db, "campanha");
-  let countdownTimeout; // Variável para armazenar o timeout
 
-  // Função para adicionar um zero à esquerda se o valor for menor que 10
-  function padValue(value) {
-    return value < 10 ? `0${value}` : value;
-  }
 
-  // Função para iniciar a contagem regressiva
-  function startCountdown(campanha) {
-    // Convertendo os valores para números inteiros
-    let dias = parseInt(campanha.dias);
-    let horas = parseInt(campanha.horas);
-    let minutos = parseInt(campanha.minutos);
-    let segundos = parseInt(campanha.segundos);
 
-    // Verificar se os valores são válidos, se não, definir como zero
-    dias = isNaN(dias) ? 0 : dias;
-    horas = isNaN(horas) ? 0 : horas;
-    minutos = isNaN(minutos) ? 0 : minutos;
-    segundos = isNaN(segundos) ? 0 : segundos;
+const campanhaRef = ref(db, "campanha");
+let countdownInterval; // Variável para armazenar o intervalo
 
-    // Calculando o total de segundos
-    let totalSeconds =
-      dias * 24 * 60 * 60 + horas * 60 * 60 + minutos * 60 + segundos;
+// Função para adicionar um zero à esquerda se o valor for menor que 10
+function padValue(value) {
+  return value < 10 ? `0${value}` : value;
+}
 
-    let countdownInterval = setInterval(() => {
-      if (totalSeconds > 0) {
-        totalSeconds--;
+// Função para iniciar a contagem regressiva
+function startCountdown(campanha) {
+  clearInterval(countdownInterval); // Limpar o intervalo anterior, se existir
 
-        // Calcular os novos valores de dias, horas, minutos e segundos
-        dias = Math.floor(totalSeconds / (24 * 60 * 60));
-        horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-        minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
-        segundos = totalSeconds % 60;
+  // Convertendo os valores para números inteiros
+  let dias = parseInt(campanha.dias);
+  let horas = parseInt(campanha.horas);
+  let minutos = parseInt(campanha.minutos);
+  let segundos = parseInt(campanha.segundos);
 
-        // Atualizar os elementos HTML com os novos valores
-        document.getElementById("dias").innerText = padValue(dias);
-        document.getElementById("horas").innerText = padValue(horas);
-        document.getElementById("minutos").innerText = padValue(minutos);
-        document.getElementById("segundos").innerText = padValue(segundos);
-      } else {
-        clearInterval(countdownInterval);
-        // Lógica para quando a contagem chegar a zero
-        alert("Contagem regressiva encerrada!");
-      }
-    }, 1000);
-  }
+  // Verificar se os valores são válidos, se não, definir como zero
+  dias = isNaN(dias) ? 0 : dias;
+  horas = isNaN(horas) ? 0 : horas;
+  minutos = isNaN(minutos) ? 0 : minutos;
+  segundos = isNaN(segundos) ? 0 : segundos;
 
-  // Monitorando alterações no nó 'campanha'
-  onValue(campanhaRef, (snapshot) => {
-    const campanha = snapshot.val();
-    if (campanha) {
-      document.getElementById("campanha-local").innerText = campanha.rua;
+  // Calculando o total de segundos
+  let totalSeconds =
+    dias * 24 * 60 * 60 + horas * 60 * 60 + minutos * 60 + segundos;
 
-      // Verificar se há valores válidos para iniciar a contagem regressiva
-      if (
-        campanha.dias !== undefined &&
-        campanha.horas !== undefined &&
-        campanha.minutos !== undefined &&
-        campanha.segundos !== undefined
-      ) {
-        // Verificar se a contagem regressiva já foi iniciada
-        if (!countdownTimeout) {
-          // Iniciar a contagem regressiva
-          startCountdown(campanha);
-        }
-      }
+  countdownInterval = setInterval(() => {
+    if (totalSeconds > 0) {
+      totalSeconds--;
+
+      // Calcular os novos valores de dias, horas, minutos e segundos
+      dias = Math.floor(totalSeconds / (24 * 60 * 60));
+      horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+      minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
+      segundos = totalSeconds % 60;
+
+      // Atualizar os elementos HTML com os novos valores
+      document.getElementById("dias").innerText = padValue(dias);
+      document.getElementById("horas").innerText = padValue(horas);
+      document.getElementById("minutos").innerText = padValue(minutos);
+      document.getElementById("segundos").innerText = padValue(segundos);
     } else {
-      document.getElementById("campanha-local").innerText =
-        "Nenhuma campanha configurada";
+      clearInterval(countdownInterval);
+      // Lógica para quando a contagem chegar a zero
+      alert("Contagem regressiva encerrada!");
     }
-  });
+  }, 1000);
+}
 
-  const sr = ScrollReveal({
-    origin: "bottom",
-    distance: "50px",
-    duration: 2000,
-    reset: true,
-  });
+// Monitorando alterações no nó 'campanha'
+onValue(campanhaRef, (snapshot) => {
+  const campanha = snapshot.val();
+  if (campanha) {
+    document.getElementById("campanha-local").innerText = campanha.rua;
 
-  sr.reveal(".sr-element");
+    // Verificar se há valores válidos para iniciar a contagem regressiva
+    if (
+      campanha.dias !== undefined &&
+      campanha.horas !== undefined &&
+      campanha.minutos !== undefined &&
+      campanha.segundos !== undefined
+    ) {
+      // Iniciar a contagem regressiva
+      startCountdown(campanha);
+    }
+  } else {
+    document.getElementById("campanha-local").innerText =
+      "Nenhuma campanha configurada";
+  }
+});
+
+
+const sr = ScrollReveal({
+  origin: "bottom",
+  distance: "50px",
+  duration: 2000,
+  reset: true,
+});
+
+sr.reveal(".sr-element");
