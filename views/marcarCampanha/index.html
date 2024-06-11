@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +17,12 @@
             height: 100vh;
             margin: 0;
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         form {
             background: #fff;
             padding: 20px;
@@ -28,11 +31,13 @@
             max-width: 400px;
             width: 100%;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             color: #555;
         }
+
         input {
             width: calc(100% - 22px);
             padding: 10px;
@@ -41,6 +46,7 @@
             border-radius: 4px;
             font-size: 16px;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -51,11 +57,13 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
+
 <body>
     <form id="updateCampanhaForm">
         <h1>Atualizar Campanha</h1>
@@ -78,14 +86,13 @@
 
         // Configuração do Firebase
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID",
-            measurementId: "YOUR_MEASUREMENT_ID"
+            apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
+            authDomain: "arthur-schultz.firebaseapp.com",
+            projectId: "arthur-schultz",
+            storageBucket: "arthur-schultz.appspot.com",
+            messagingSenderId: "273634896292",
+            appId: "1:273634896292:web:0654cd33669194ded4b931",
+            measurementId: "G-C5G4446HG9"
         };
 
         // Inicializa o Firebase
@@ -96,28 +103,30 @@
         document.getElementById("updateCampanhaForm").addEventListener("submit", function (event) {
             event.preventDefault();
             const rua = document.getElementById("rua").value;
-            const dias = document.getElementById("dias").value;
-            const horas = document.getElementById("horas").value;
-            const minutos = document.getElementById("minutos").value;
-            const segundos = document.getElementById("segundos").value;
+            const dias = parseInt(document.getElementById("dias").value);
+            const horas = parseInt(document.getElementById("horas").value);
+            const minutos = parseInt(document.getElementById("minutos").value);
+            const segundos = parseInt(document.getElementById("segundos").value);
 
             const campanhaRef = ref(database, "campanha");
             set(campanhaRef, {
                 rua: rua,
-                dias: parseInt(dias),
-                horas: parseInt(horas),
-                minutos: parseInt(minutos),
-                segundos: parseInt(segundos)
+                dias: dias,
+                horas: horas,
+                minutos: minutos,
+                segundos: segundos
             })
-            .then(() => {
-                alert('Campanha atualizada com sucesso!');
-                document.getElementById("updateCampanhaForm").reset();
-            })
-            .catch((error) => {
-                console.error('Erro ao atualizar campanha:', error);
-                alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
-            });
+                .then(() => {
+                    alert('Campanha atualizada com sucesso!');
+                    document.getElementById("updateCampanhaForm").reset();
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar campanha:', error);
+                    alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
+                });
         });
+
     </script>
 </body>
+
 </html>
