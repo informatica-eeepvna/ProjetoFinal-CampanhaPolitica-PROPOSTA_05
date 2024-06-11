@@ -174,7 +174,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
     
         const firebaseConfig = {
             apiKey: "AIzaSyD_czM4CzjX8EqMdluGslbR13UfTIOOOys",
@@ -214,8 +214,8 @@
             const password = document.getElementById('senha').value;
     
             // Verificar se os dados do usuário estão no Realtime Database antes de fazer o login
-            const usersRef = ref(db, `users`);
-            get(child(usersRef, email.replace('.', ','))).then((snapshot) => {
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     signInWithEmailAndPassword(auth, email, password)
                         .then((userCredential) => {
@@ -226,17 +226,14 @@
                             const errorMessage = error.message;
                             console.error(errorMessage);
                             // Aqui você pode exibir uma mensagem de erro para o usuário
-                            alert("Erro ao fazer login: " + errorMessage);
                         });
                 } else {
                     console.log("Usuário não encontrado no banco de dados");
-                    // Exibir mensagem informando que os dados de login são inválidos
-                    alert("Erro nas credenciais: Usuário não encontrado no banco de dados");
+                    // Aqui você pode exibir uma mensagem informando que os dados de login são inválidos
                 }
             }).catch((error) => {
                 console.error("Erro ao acessar o banco de dados:", error);
-                // Exibir mensagem de erro para o usuário
-                alert("Erro ao acessar o banco de dados: " + error.message);
+                // Aqui você pode exibir uma mensagem de erro para o usuário
             });
         });
     
@@ -249,9 +246,13 @@
             });
         }
     
-        
+        // Evento disparado ao carregar a página
+        document.addEventListener("DOMContentLoaded", function () {
+            onAuthStateChanged(auth, (user) => {
+                verificarAutenticacao();
+            });
+        });
     </script>
-    
     
     
 </body>
