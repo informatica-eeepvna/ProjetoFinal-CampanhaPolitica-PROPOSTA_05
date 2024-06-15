@@ -153,12 +153,16 @@ body{
     background-color: #fff;
     text-align: center;
     font-size: 14px;
+    width: 130px;
+    margin: 6px;
 }
 .d-1-image img {
     width: 100%;
+    transform: scale(1.1);
+
 }
 .d-1-image.small {
-    width: 80%;
+    width: 90%;
     font-size: 12px;
 }
 .d-2 {
