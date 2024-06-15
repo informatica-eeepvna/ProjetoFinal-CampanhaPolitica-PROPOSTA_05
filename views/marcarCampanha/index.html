@@ -38,7 +38,8 @@
             color: #555;
         }
 
-        input {
+        input,
+        textarea {
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 20px;
@@ -77,6 +78,8 @@
         <input type="number" id="minutos" name="minutos" min="0" max="59" required>
         <label for="segundos">Segundos:</label>
         <input type="number" id="segundos" name="segundos" min="0" max="59" required>
+        <label for="descricao">Descrição da campanha:</label>
+        <textarea id="descricao" name="descricao" rows="4" required></textarea>
         <button type="submit">Atualizar Campanha</button>
     </form>
 
@@ -107,6 +110,7 @@
             const horas = parseInt(document.getElementById("horas").value);
             const minutos = parseInt(document.getElementById("minutos").value);
             const segundos = parseInt(document.getElementById("segundos").value);
+            const descricao = document.getElementById("descricao").value;
 
             const campanhaRef = ref(database, "campanha");
             set(campanhaRef, {
@@ -114,7 +118,8 @@
                 dias: dias,
                 horas: horas,
                 minutos: minutos,
-                segundos: segundos
+                segundos: segundos,
+                descricao: descricao
             })
                 .then(() => {
                     alert('Campanha atualizada com sucesso!');
@@ -125,7 +130,6 @@
                     alert('Ocorreu um erro ao atualizar a campanha. Por favor, tente novamente.');
                 });
         });
-
     </script>
 </body>
 

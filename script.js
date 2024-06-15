@@ -259,81 +259,78 @@ document.addEventListener("DOMContentLoaded", function () {
 //     showSlide(currentSlide);
 //   }, 5000);
 
-
-
-
 const campanhaRef = ref(db, "campanha");
-let countdownInterval; // Variável para armazenar o intervalo
+    let countdownInterval; // Variável para armazenar o intervalo
 
-// Função para adicionar um zero à esquerda se o valor for menor que 10
-function padValue(value) {
-  return value < 10 ? `0${value}` : value;
-}
-
-// Função para iniciar a contagem regressiva
-function startCountdown(campanha) {
-  clearInterval(countdownInterval); // Limpar o intervalo anterior, se existir
-
-  // Convertendo os valores para números inteiros
-  let dias = parseInt(campanha.dias);
-  let horas = parseInt(campanha.horas);
-  let minutos = parseInt(campanha.minutos);
-  let segundos = parseInt(campanha.segundos);
-
-  // Verificar se os valores são válidos, se não, definir como zero
-  dias = isNaN(dias) ? 0 : dias;
-  horas = isNaN(horas) ? 0 : horas;
-  minutos = isNaN(minutos) ? 0 : minutos;
-  segundos = isNaN(segundos) ? 0 : segundos;
-
-  // Calculando o total de segundos
-  let totalSeconds =
-    dias * 24 * 60 * 60 + horas * 60 * 60 + minutos * 60 + segundos;
-
-  countdownInterval = setInterval(() => {
-    if (totalSeconds > 0) {
-      totalSeconds--;
-
-      // Calcular os novos valores de dias, horas, minutos e segundos
-      dias = Math.floor(totalSeconds / (24 * 60 * 60));
-      horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-      minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
-      segundos = totalSeconds % 60;
-
-      // Atualizar os elementos HTML com os novos valores
-      document.getElementById("dias").innerText = padValue(dias);
-      document.getElementById("horas").innerText = padValue(horas);
-      document.getElementById("minutos").innerText = padValue(minutos);
-      document.getElementById("segundos").innerText = padValue(segundos);
-    } else {
-      clearInterval(countdownInterval);
-      // Lógica para quando a contagem chegar a zero
-      alert("Contagem regressiva encerrada!");
+    // Função para adicionar um zero à esquerda se o valor for menor que 10
+    function padValue(value) {
+        return value < 10 ? `0${value}` : value;
     }
-  }, 1000);
-}
 
-// Monitorando alterações no nó 'campanha'
-onValue(campanhaRef, (snapshot) => {
-  const campanha = snapshot.val();
-  if (campanha) {
-    document.getElementById("campanha-local").innerText = campanha.rua;
+    // Função para iniciar a contagem regressiva
+    function startCountdown(campanha) {
+        clearInterval(countdownInterval); // Limpar o intervalo anterior, se existir
 
-    // Verificar se há valores válidos para iniciar a contagem regressiva
-    if (
-      campanha.dias !== undefined &&
-      campanha.horas !== undefined &&
-      campanha.minutos !== undefined &&
-      campanha.segundos !== undefined
-    ) {
-      // Iniciar a contagem regressiva
-      startCountdown(campanha);
+        // Convertendo os valores para números inteiros
+        let dias = parseInt(campanha.dias);
+        let horas = parseInt(campanha.horas);
+        let minutos = parseInt(campanha.minutos);
+        let segundos = parseInt(campanha.segundos);
+
+        // Verificar se os valores são válidos, se não, definir como zero
+        dias = isNaN(dias) ? 0 : dias;
+        horas = isNaN(horas) ? 0 : horas;
+        minutos = isNaN(minutos) ? 0 : minutos;
+        segundos = isNaN(segundos) ? 0 : segundos;
+
+        // Calculando o total de segundos
+        let totalSeconds = dias * 24 * 60 * 60 + horas * 60 * 60 + minutos * 60 + segundos;
+
+        countdownInterval = setInterval(() => {
+            if (totalSeconds > 0) {
+                totalSeconds--;
+
+                // Calcular os novos valores de dias, horas, minutos e segundos
+                dias = Math.floor(totalSeconds / (24 * 60 * 60));
+                horas = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+                minutos = Math.floor((totalSeconds % (60 * 60)) / 60);
+                segundos = totalSeconds % 60;
+
+                // Atualizar os elementos HTML com os novos valores
+                document.getElementById("dias").innerText = padValue(dias);
+                document.getElementById("horas").innerText = padValue(horas);
+                document.getElementById("minutos").innerText = padValue(minutos);
+                document.getElementById("segundos").innerText = padValue(segundos);
+            } else {
+                clearInterval(countdownInterval);
+                // Lógica para quando a contagem chegar a zero
+                alert("Contagem regressiva encerrada!");
+            }
+        }, 1000);
     }
-  } else {
-    document.getElementById("campanha-local").innerText =
-      "Nenhuma campanha configurada";
-  }
-});
+
+    // Monitorando alterações no nó 'campanha'
+    onValue(campanhaRef, (snapshot) => {
+        const campanha = snapshot.val();
+        if (campanha) {
+            document.getElementById("campanha-local").innerText = campanha.rua;
+            document.getElementById("campanha-descricao").innerText = campanha.descricao; // Atualizar a descrição
+
+            // Verificar se há valores válidos para iniciar a contagem regressiva
+            if (
+                campanha.dias !== undefined &&
+                campanha.horas !== undefined &&
+                campanha.minutos !== undefined &&
+                campanha.segundos !== undefined
+            ) {
+                // Iniciar a contagem regressiva
+                startCountdown(campanha);
+            }
+        } else {
+            document.getElementById("campanha-local").innerText = "Nenhuma campanha configurada";
+            document.getElementById("campanha-descricao").innerText = "Descrição não disponível"; // Mensagem quando não há campanha
+        }
+    });
 
 
 const sr = ScrollReveal({
